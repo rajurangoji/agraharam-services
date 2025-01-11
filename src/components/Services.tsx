@@ -4,6 +4,7 @@ const Services = () => {
   const [activeService, setActiveService] = useState(0); // Default service index
   const services = [
     {
+      id: "1",
       title: "Horoscope & Predictions",
       description:
         "Daily, weekly, and monthly horoscopes tailored to individual zodiac signs. Personalized predictions based on your birth chart.",
@@ -11,6 +12,7 @@ const Services = () => {
         "https://www.hindustantimes.com/ht-img/img/2023/12/30/550x309/46992_1703937966410_1703937984680.jpg",
     },
     {
+      id: "2",
       title: "Birth Chart Generation",
       description:
         "Creation of detailed birth charts using your birth date, time, and location. Insights into personality traits and life paths based on astrological positions.",
@@ -18,6 +20,7 @@ const Services = () => {
         "https://media.istockphoto.com/id/1280278639/vector/zodiac-astrology-circle-astrological-constellation-wheel-zodiac-horoscope-signs-mystical.jpg?s=612x612&w=0&k=20&c=4BbgxKKrRd1OL3SoBE0IMqoVURGJFGiwwUzVAivsJnc=",
     },
     {
+      id: "3",
       title: "Remedies and Pariharas",
       description:
         "Recommendations for remedies to mitigate negative influences based on astrology. Suggestions for poojas, donations, and other spiritual practices.",
@@ -25,6 +28,7 @@ const Services = () => {
         "https://nadiastrologyusa.com/img/nadi-astrology-remedies-online.jpg",
     },
     {
+      id: "4",
       title: "Brahmin Catering Services",
       description:
         "Catering for special events such as weddings and housewarming ceremonies, provided by Brahmin chefs. Options for traditional dishes and services tailored to cultural practices.",
@@ -32,6 +36,7 @@ const Services = () => {
         "https://aahalaxmiganeshcaterers.com/assets/images/catering-services/banner-01.jpg",
     },
     {
+      id: "5",
       title: "Educational Resources",
       description:
         "Access to articles, videos, and guides about astrology, zodiac signs, and horoscopes. Information on compatibility analyses and career guidance.",
@@ -63,7 +68,7 @@ const Services = () => {
                     transform: `rotate(${angle}deg) translate(8rem) rotate(-${angle}deg)`,
                   }}
                 >
-                  {index + 1}
+                  {service.id}
                 </button>
               );
             })}
