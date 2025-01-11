@@ -10,7 +10,7 @@ const Navbar = () => {
 
   return (
     <nav className="fixed top-0 left-0 w-full z-10 bg-transparent text-white">
-      <div className="max-w-full m-2 px-12 py-4 flex justify-between items-center bg-gray-800/30 backdrop-blur-sm rounded-lg text-white">
+      <div className="max-w-full lg:m-2 px-12 py-4 flex justify-between items-center bg-gray-800/30 backdrop-blur-sm rounded-lg text-white">
         <h1 className="text-2xl font-bold">Agraharam</h1>
 
         {/* Regular Menu for Larger Screens */}
@@ -18,10 +18,10 @@ const Navbar = () => {
           {[
             "Home",
             "Services",
-            "About Us",
+            "About",
             "Testimonials",
             "Blog",
-            "Contact Us",
+            "Contact",
           ].map((item, index) => (
             <li
               key={index}
@@ -52,7 +52,7 @@ const Navbar = () => {
 
       {/* Dropdown Menu for Mobile */}
       {menuOpen && (
-        <div className="lg:hidden mt-4 space-y-4 text-white bg-gray-800/70 p-4 rounded-lg">
+        <div className="lg:hidden space-y-4 text-white bg-gray-800/70 p-4 rounded-lg">
           {[
             "Home",
             "Services",
