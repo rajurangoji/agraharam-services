@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import planet from "./assets/Unknown-3.jpg";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import Services from "./components/Services";

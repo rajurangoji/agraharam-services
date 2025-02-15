@@ -14,25 +14,26 @@ export default function CardCarousel() {
   const getPosition = (index: number) => {
     const offset = index - currentIndex;
     const positions = [
-      { rotate: -25, x: "-100%", scale: 0.8, zIndex: 1 },
-      { rotate: -10, x: "-50%", scale: 0.9, zIndex: 2 },
-      { rotate: 0, x: "0%", scale: 1, zIndex: 3 }, // Center image
-      { rotate: 10, x: "50%", scale: 0.9, zIndex: 2 },
-      { rotate: 25, x: "100%", scale: 0.8, zIndex: 1 },
+      { rotate: -25, x: "-90%", y: "10%", scale: 0.8, zIndex: 1 },  // First image (lowered)
+      { rotate: -10, x: "-50%", y: "0%", scale: 0.9, zIndex: 2 },
+      { rotate: 0, x: "0%", y: "0%", scale: 1, zIndex: 3 },  // Center image stays normal
+      { rotate: 10, x: "50%", y: "0%", scale: 0.9, zIndex: 2 },
+      { rotate: 25, x: "90%", y: "10%", scale: 0.8, zIndex: 1 },  // Last image (lowered)
     ];
+    
     return positions[(offset + 5) % 5]; // Loop positions for any number of images
   };
 
   return (
     <div className="relative w-full max-w-[500px] lg:max-w-[600px] h-[400px] flex justify-center items-center">
       {images.map((src, index) => {
-        const { rotate, x, scale, zIndex } = getPosition(index);
+        const { rotate, x, y, scale, zIndex } = getPosition(index); // ✅ Include y here
         return (
           <motion.div
             key={index}
             className="absolute w-[200px] h-[300px] lg:w-[250px] lg:h-[350px] cursor-pointer"
             style={{ zIndex }}
-            animate={{ rotate, x, scale }}
+            animate={{ rotate, x, y, scale }}
             transition={{ duration: 0.5, ease: "easeInOut" }}
             onClick={() => setCurrentIndex(index)}
           >
