@@ -13,6 +13,7 @@
   "dependencies": {
     "@lottiefiles/dotlottie-react": "^0.12.1",
     "@tanstack/react-query": "^5.63.0",
+    "framer-motion": "^12.4.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-icons": "^5.4.0",
