@@ -48,11 +48,11 @@ const Services = () => {
   const [currentIndex, setCurrentIndex] = useState(2); // Default to center
 
   const getPosition = (index: number) => {
-    const offset = (index - currentIndex + services.length) % services.length; // Handle circular shifting
+    const offset = (index - currentIndex + services.length+2) % services.length; // Handle circular shifting
     const positions = [
       { rotate: -25, x: "-90%", y: "10%", scale: 0.8, zIndex: 1 },
       { rotate: -10, x: "-50%", y: "0%", scale: 0.9, zIndex: 2 },
-      { rotate: 0, x: "0%", y: "0%", scale: 1, zIndex: 3 }, // Center
+      { rotate: 0, x: "0%", y: "0%", scale: 1, zIndex: 3 }, // Center image..
       { rotate: 10, x: "50%", y: "0%", scale: 0.9, zIndex: 2 },
       { rotate: 25, x: "90%", y: "10%", scale: 0.8, zIndex: 1 },
     ];
@@ -63,14 +63,14 @@ const Services = () => {
   return (
     <section
       id="services"
-      className="py-16 bg-[#13142e] text-white flex items-center justify-center"
+      className="py-16 bg-[#13142e] text-primary-voilet flex items-center justify-between"
     >
-      <div className="max-w-screen-xl px-6 lg:px-16 w-full">
+      <div className="w-full flex flex-col px-6 lg:px-16">
         <h2 className="text-4xl font-semibold text-center mb-12 uppercase tracking-wider">
           Our Services
         </h2>
 
-        <div className="flex flex-col lg:flex-row items-center lg:items-start w-full space-y-10 lg:space-y-0 lg:space-x-10">
+        <div className="px-20 flex flex-col lg:flex-row items-center justify-between space-y-10 lg:space-y-0 lg:space-x-10">
           {/* Carousel */}
           <div className="relative w-full max-w-[500px] lg:max-w-[600px] h-[400px] flex justify-center items-center">
             {services.map((service, index) => {
