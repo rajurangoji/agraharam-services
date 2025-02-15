@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import CircularMenu from "./CircularMenu";
-// import CustomCarousel from "./CustomCarousel";
+import NormalCarousel from "./NormalCarousel";
 
 const Services = () => {
   const [activeService, setActiveService] = useState(0);
@@ -52,34 +51,34 @@ const Services = () => {
   return (
     <section
       id="services"
-      className="py-16 bg-gradient-to-b from-[#13142e] to-[#000000] text-white"
+      className="py-16 bg-[#13142e] text-white flex items-center justify-center"
     >
-      <div className="max-w-screen-xl mx-auto px-6 lg:px-16">
+      <div className="max-w-screen-xl px-6 lg:px-16 w-full">
         <h2 className="text-4xl font-semibold text-center mb-12 uppercase tracking-wider">
           Our Services
         </h2>
 
-        <div className="flex flex-col lg:flex-row items-center gap-16">
-          {/* Circular Menu with Titles */}
-          <CircularMenu services={services} setActiveService={setActiveService} />
-          {/* <CustomCarousel/> */}
+        <div className="flex flex-col lg:flex-row items-center lg:items-start w-full space-y-10 lg:space-y-0 lg:space-x-10">
+          {/* Adjusted size for better alignment */}
+          <div className="w-full lg:w-1/2 flex justify-center">
+            <NormalCarousel />
+          </div>
 
-          {/* Selected Service */}
           <motion.div
             key={activeService}
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
-            className="flex-1 bg-[#1c1f3b] p-6 rounded-lg shadow-2xl border border-white/20"
+            className="w-full lg:w-1/2 bg-[#1c1f3b] p-6 rounded-lg shadow-2xl border border-white/20 flex flex-col"
           >
             <h3 className="text-2xl font-semibold text-[#D8B4FE] mb-4">
               {services[activeService].title}
             </h3>
-            <div className="mb-4">
+            <div className="mb-4 flex justify-center">
               <img
                 src={services[activeService].image}
                 alt={services[activeService].title}
-                className="w-full h-80 rounded-lg object-cover border border-[#D8B4FE]"
+                className="w-full max-h-[350px] object-cover rounded-lg border border-[#D8B4FE]"
               />
             </div>
             <p className="text-white/80">{services[activeService].description}</p>
