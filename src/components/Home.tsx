@@ -1,5 +1,5 @@
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
-import bg_img from "../assets/bg-img.png";
+// import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import bg_img from "../assets/Unknown-8.jpg";
 import { motion } from "framer-motion";
 
 const Home = () => {
@@ -15,7 +15,7 @@ const Home = () => {
           alt="Background"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-black/40"></div>{" "}
+        <div className="absolute inset-0 bg-black/20"></div>{" "}
         {/* Dark overlay for clarity */}
       </div>
 
@@ -70,7 +70,7 @@ const Home = () => {
         </div>
 
         {/* Lottie Animation */}
-        <motion.div
+        {/* <motion.div
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 1, delay: 0.8 }}
@@ -81,7 +81,7 @@ const Home = () => {
             autoplay
             className="w-48 lg:w-64"
           />
-        </motion.div>
+        </motion.div> */}
       </motion.div>
     </section>
   );

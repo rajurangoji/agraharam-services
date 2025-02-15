@@ -1,21 +1,35 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-scroll";
 import { motion, AnimatePresence } from "framer-motion";
 
-const Navbar = () => {
+const Navbar = ({ activeSection }: { activeSection: string }) => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolling, setScrolling] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolling(window.scrollY > 50);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const handleMenuClick = () => {
     setMenuOpen(false); // Close the menu when an item is clicked
   };
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-transparent text-white">
+    <nav
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
+        scrolling ? "bg-gray-900/80 backdrop-blur-md" : "bg-transparent"
+      } text-white`}
+    >
       <motion.div
         initial={{ y: -50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="max-w-full lg:m-2 px-12 py-4 flex justify-between items-center bg-gray-800/30 backdrop-blur-md rounded-lg text-white"
+        className="max-w-full lg:m-2 px-12 py-4 flex justify-between items-center rounded-lg"
       >
         {/* Logo */}
         <motion.h1
@@ -26,18 +40,22 @@ const Navbar = () => {
           Agraharam
         </motion.h1>
 
-        {/* Regular Menu for Larger Screens */}
+        {/* Desktop Menu */}
         <ul className="hidden lg:flex space-x-6">
-          {["Home", "Services", "About", "Testimonials", "Blog", "Contact"].map(
+          {["Home", "Services", "About", "Testimonials", "Contact"].map(
             (item, index) => (
               <motion.li
                 key={index}
                 whileHover={{ scale: 1.1, color: "#B2AFFE" }}
                 transition={{ duration: 0.3 }}
-                className="cursor-pointer font-iora transition-all"
+                className={`cursor-pointer font-iora transition-all ${
+                  activeSection === item.toLowerCase()
+                    ? "text-violet-400 font-bold"
+                    : "text-gray-300"
+                }`}
               >
                 <Link
-                  to={item.replace(/\s+/g, "").toLowerCase()}
+                  to={item.toLowerCase()}
                   smooth={true}
                   duration={500}
                   offset={-70}
@@ -49,7 +67,7 @@ const Navbar = () => {
           )}
         </ul>
 
-        {/* Hamburger Icon for Smaller Screens */}
+        {/* Hamburger Menu (Mobile) */}
         <motion.div className="lg:hidden">
           <motion.button
             whileTap={{ scale: 0.9 }}
@@ -62,7 +80,7 @@ const Navbar = () => {
         </motion.div>
       </motion.div>
 
-      {/* Dropdown Menu for Mobile */}
+      {/* Mobile Dropdown Menu */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
@@ -70,18 +88,22 @@ const Navbar = () => {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -20, opacity: 0 }}
             transition={{ duration: 0.5 }}
-            className="lg:hidden space-y-4 text-white bg-gray-800/90 p-6 rounded-lg absolute top-16 left-0 w-full text-center"
+            className="lg:hidden space-y-4 text-white bg-gray-900/90 p-6 rounded-lg absolute top-16 left-0 w-full text-center"
           >
-            {["Home", "Services", "About", "Testimonials", "Blog", "Contact"].map(
+            {["Home", "Services", "About", "Testimonials", "Contact"].map(
               (item, index) => (
                 <motion.li
                   key={index}
                   whileHover={{ scale: 1.1, color: "#B2AFFE" }}
                   transition={{ duration: 0.3 }}
-                  className="cursor-pointer font-iora transition-all"
+                  className={`cursor-pointer font-iora transition-all ${
+                    activeSection === item.toLowerCase()
+                      ? "text-violet-400 font-bold"
+                      : "text-gray-300"
+                  }`}
                 >
                   <Link
-                    to={item.replace(/\s+/g, "").toLowerCase()}
+                    to={item.toLowerCase()}
                     smooth={true}
                     duration={500}
                     offset={-70}

@@ -6,7 +6,7 @@ module.exports = {
     extend: {
       colors: {
         primary: {
-          black: "#231F20",
+          black: "#000000",
           voilet: "#B2AFFE",
           peach: "#F4EDD3",
           white: "#FFFFFF",

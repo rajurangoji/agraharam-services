@@ -1,7 +1,11 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
+import CircularMenu from "./CircularMenu";
+// import CustomCarousel from "./CustomCarousel";
 
 const Services = () => {
-  const [activeService, setActiveService] = useState(0); // Default service index
+  const [activeService, setActiveService] = useState(0);
+
   const services = [
     {
       id: "1",
@@ -46,52 +50,40 @@ const Services = () => {
   ];
 
   return (
-    <section id="services" className="py-16 bg-gray-100">
+    <section
+      id="services"
+      className="py-16 bg-gradient-to-b from-[#13142e] to-[#000000] text-white"
+    >
       <div className="max-w-screen-xl mx-auto px-6 lg:px-16">
-        <h2 className="text-4xl font-semibold text-center mb-12">
+        <h2 className="text-4xl font-semibold text-center mb-12 uppercase tracking-wider">
           Our Services
         </h2>
 
         <div className="flex flex-col lg:flex-row items-center gap-16">
-          {/* Circular Buttons */}
-          <div className="relative w-64 h-64">
-            {services.map((service, index) => {
-              const angle = (360 / services.length) * index;
-              return (
-                <button
-                  key={index}
-                  onClick={() => setActiveService(index)}
-                  className={`absolute w-12 h-12 lg:w-16 lg:h-16 rounded-full bg-yellow-500 text-white flex items-center justify-center font-bold hover:bg-yellow-600 transition ${
-                    activeService === index ? "ring-4 ring-yellow-300" : ""
-                  }`}
-                  style={{
-                    transform: `rotate(${angle}deg) translate(8rem) rotate(-${angle}deg)`,
-                  }}
-                >
-                  {service.id}
-                </button>
-              );
-            })}
-          </div>
+          {/* Circular Menu with Titles */}
+          <CircularMenu services={services} setActiveService={setActiveService} />
+          {/* <CustomCarousel/> */}
 
           {/* Selected Service */}
-          <div className="flex-1">
-            <div className="bg-white p-6 rounded-lg shadow-lg transition-transform duration-500 transform">
-              <h3 className="text-2xl font-semibold text-yellow-500 mb-4">
-                {services[activeService].title}
-              </h3>
-              <div className="mb-4">
-                <img
-                  src={services[activeService].image}
-                  alt={services[activeService].title}
-                  className="w-full h-80 rounded-lg object-cover"
-                />
-              </div>
-              <p>{services[activeService].description}</p>
+          <motion.div
+            key={activeService}
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            className="flex-1 bg-[#1c1f3b] p-6 rounded-lg shadow-2xl border border-white/20"
+          >
+            <h3 className="text-2xl font-semibold text-[#D8B4FE] mb-4">
+              {services[activeService].title}
+            </h3>
+            <div className="mb-4">
+              <img
+                src={services[activeService].image}
+                alt={services[activeService].title}
+                className="w-full h-80 rounded-lg object-cover border border-[#D8B4FE]"
+              />
             </div>
-          </div>
-
-          <button>View More</button>
+            <p className="text-white/80">{services[activeService].description}</p>
+          </motion.div>
         </div>
       </div>
     </section>

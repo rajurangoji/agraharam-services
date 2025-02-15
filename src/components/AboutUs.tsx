@@ -1,21 +1,18 @@
 const AboutUs = () => {
   return (
-    <section
-      id="about"
-      className="py-16 bg-gradient-to-r from-purple-500 to-indigo-600 text-white"
-    >
+    <section id="about" className="py-16 bg-gradient-to-b from-[#13142e] to-[#000000] text-primary-white">
       <div className="max-w-screen-xl mx-auto px-6 lg:px-16">
-        <h2 className="text-4xl lg:text-5xl font-semibold text-center mb-12 text-yellow-500">
+        <h2 className="text-4xl lg:text-5xl font-bold text-center mb-12 text-primary-voilet font-iora">
           About Us
         </h2>
 
         <div className="flex flex-col lg:flex-row gap-12">
           {/* Left Section: Who We Are */}
           <div className="lg:w-1/2">
-            <h3 className="text-3xl font-semibold text-yellow-500 mb-6">
+            <h3 className="text-3xl font-semibold text-primary-voilet mb-6 font-iora">
               Who We Are
             </h3>
-            <p className="text-lg text-gray-300 leading-relaxed">
+            <p className="text-lg text-neutral-200 leading-relaxed font-light">
               Agraharam is a trusted platform offering astrology-based services
               and Brahmin catering services. Our offerings include horoscope
               predictions, personalized birth chart generation, spiritual
@@ -34,40 +31,24 @@ const AboutUs = () => {
 
           {/* Right Section: Our Services */}
           <div className="lg:w-1/2">
-            <h3 className="text-3xl font-semibold text-yellow-500 mb-6">
+            <h3 className="text-3xl font-semibold text-primary-voilet mb-6 font-iora">
               Our Services
             </h3>
-            <ul className="space-y-4 text-lg text-gray-300">
-              <li className="flex items-center gap-3">
-                <span className="bg-yellow-500 text-white rounded-full p-2">
-                  🌟
-                </span>
-                Horoscope & Predictions
-              </li>
-              <li className="flex items-center gap-3">
-                <span className="bg-yellow-500 text-white rounded-full p-2">
-                  🗓️
-                </span>
-                Birth Chart Generation
-              </li>
-              <li className="flex items-center gap-3">
-                <span className="bg-yellow-500 text-white rounded-full p-2">
-                  🔮
-                </span>
-                Remedies and Pariharas
-              </li>
-              <li className="flex items-center gap-3">
-                <span className="bg-yellow-500 text-white rounded-full p-2">
-                  🍽️
-                </span>
-                Brahmin Catering Services
-              </li>
-              <li className="flex items-center gap-3">
-                <span className="bg-yellow-500 text-white rounded-full p-2">
-                  📚
-                </span>
-                Educational Resources
-              </li>
+            <ul className="space-y-4 text-lg text-neutral-200 font-light">
+              {[
+                { icon: "🌟", text: "Horoscope & Predictions" },
+                { icon: "🗓️", text: "Birth Chart Generation" },
+                { icon: "🔮", text: "Remedies and Pariharas" },
+                { icon: "🍽️", text: "Brahmin Catering Services" },
+                { icon: "📚", text: "Educational Resources" },
+              ].map((item, index) => (
+                <li key={index} className="flex items-center gap-3">
+                  <span className="bg-primary-peach text-primary-black rounded-full p-2 text-xl">
+                    {item.icon}
+                  </span>
+                  {item.text}
+                </li>
+              ))}
             </ul>
           </div>
         </div>
