@@ -72,6 +72,7 @@ const ServicesPage = () => {
               </h2>
               <p className="text-lg text-white/80 leading-relaxed">
                 {service.description}
+                
               </p>
               <p className="text-sm text-white/50 mt-4 italic">
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam."
