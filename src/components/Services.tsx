@@ -1,49 +1,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import horoscope from "../assets/horoscope.jpg";
-import Donations from "../assets/Donations.jpg";
-import birth_chart from "../assets/birth_chart.jpg";
-import Catering from "../assets/catring.jpg";
-import education from "../assets/education.jpg";
+import { services_types } from "@/config/services";
 import { useNavigate } from "react-router";
-
-const services = [
-  {
-    id: "1",
-    title: "Horoscope & Predictions",
-    description:
-      "Daily, weekly, and monthly horoscopes tailored to individual zodiac signs. Personalized predictions based on your birth chart.",
-    image: horoscope,
-  },
-  {
-    id: "2",
-    title: "Birth Chart Generation",
-    description:
-      "Creation of detailed birth charts using your birth date, time, and location. Insights into personality traits and life paths based on astrological positions.",
-    image: birth_chart,
-  },
-  {
-    id: "3",
-    title: "Remedies and Pariharas",
-    description:
-      "Recommendations for remedies to mitigate negative influences based on astrology. Suggestions for poojas, donations, and other spiritual practices.",
-    image: Donations,
-  },
-  {
-    id: "4",
-    title: "Brahmin Catering Services",
-    description:
-      "Catering for special events such as weddings and housewarming ceremonies, provided by Brahmin chefs. Options for traditional dishes and services tailored to cultural practices.",
-    image: Catering,
-  },
-  {
-    id: "5",
-    title: "Educational Resources",
-    description:
-      "Access to articles, videos, and guides about astrology, zodiac signs, and horoscopes. Information on compatibility analyses and career guidance.",
-    image: education,
-  },
-];
+import { Button } from "./ui/button";
 
 const Services = () => {
   const [currentIndex, setCurrentIndex] = useState(2); // Default to center
@@ -51,7 +10,8 @@ const Services = () => {
 
   const getPosition = (index: number) => {
     const offset =
-      (index - currentIndex + services.length + 2) % services.length; // Handle circular shifting
+      (index - currentIndex + services_types.length + 2) %
+      services_types.length; // Handle circular shifting
     const positions = [
       { rotate: -25, x: "-90%", y: "10%", scale: 0.8, zIndex: 1 },
       { rotate: -10, x: "-50%", y: "0%", scale: 0.9, zIndex: 2 },
@@ -74,9 +34,9 @@ const Services = () => {
         </h2>
 
         <div className="px-20 flex flex-col lg:flex-row items-center justify-between space-y-10 lg:space-y-0 lg:space-x-10">
-          {/* Carousel */}
+          {/* Image Slider */}
           <div className="relative w-full max-w-[500px] lg:max-w-[600px] h-[400px] flex justify-center items-center">
-            {services.map((service, index) => {
+            {services_types.map((service, index) => {
               const { rotate, x, y, scale, zIndex } = getPosition(index);
               return (
                 <motion.div
@@ -97,7 +57,7 @@ const Services = () => {
             })}
           </div>
 
-          {/* Service Details (Updates on Image Click) */}
+          {/* Service Description */}
           <motion.div
             key={currentIndex}
             initial={{ opacity: 0, x: 50 }}
@@ -105,25 +65,50 @@ const Services = () => {
             transition={{ duration: 0.5 }}
             className="w-full lg:w-1/2 bg-[#1c1f3b] p-6 rounded-lg shadow-2xl border border-white/20 flex flex-col"
           >
-            <h3 className="text-2xl font-semibold text-[#D8B4FE] mb-4">
-              {services[currentIndex].title}
+            {/* Clickable Title */}
+            <h3 className="text-2xl font-semibold text-[#D8B4FE] mb-4 text-center">
+              {services_types[currentIndex].title}
             </h3>
+
+            {/* Center Image (Changes on Click) */}
             <div className="mb-4 flex justify-center">
               <img
-                src={services[currentIndex].image}
-                alt={services[currentIndex].title}
-                className="w-full max-h-[350px] object-cover rounded-lg border border-[#D8B4FE]"
+                src={services_types[currentIndex].image}
+                alt={services_types[currentIndex].title}
+                className="w-full max-h-[350px] object-cover rounded-lg border border-[#D8B4FE] transition-transform hover:scale-105"
               />
             </div>
-            <p className="text-white/80">
-              {services[currentIndex].description}
+
+            {/* Description */}
+            <p className="text-white/80 text-center">
+              {services_types[currentIndex].description}
             </p>
           </motion.div>
         </div>
+
+        {/* Service Title Buttons */}
+        <div className="mt-8 flex justify-center space-x-4 flex-wrap">
+          {services_types.map((service, index) => (
+            <Button
+              key={index}
+              variant="outline"
+              className={`${
+                index === currentIndex
+                  ? "bg-[#D8B4FE] text-[#13142e]"
+                  : "bg-transparent text-white hover:bg-[#D8B4FE]/30"
+              }`}
+              onClick={() => setCurrentIndex(index)}
+            >
+              {service.title}
+            </Button>
+          ))}
+        </div>
+
+        {/* View More Button */}
         <div className="flex items-center justify-end mt-10 pr-10">
-          <button onClick={() => navigate("services")}>
+          <Button variant="glow" onClick={() => navigate("services")}>
             View More Services
-          </button>
+          </Button>
         </div>
       </div>
     </section>

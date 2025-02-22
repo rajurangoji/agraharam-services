@@ -1,6 +1,7 @@
 // import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import bg_img from "../assets/Unknown-8.jpg";
 import { motion } from "framer-motion";
+import { Button } from "./ui/button";
 
 const Home = () => {
   return (
@@ -55,18 +56,7 @@ const Home = () => {
 
         {/* Lottie Animation & CTA */}
         <div className="mt-8 flex flex-col items-center gap-6">
-          {/* CTA Button with Hover Effect */}
-          <motion.button
-            whileHover={{
-              scale: 1.1,
-              boxShadow: "0px 0px 20px rgba(255, 255, 255, 0.6)",
-            }}
-            whileTap={{ scale: 0.95 }}
-            transition={{ duration: 0.3 }}
-            className="px-8 py-3 bg-[#6A5ACD] hover:bg-[#8C7CFF] text-white font-bold text-lg rounded-full shadow-2xl transition-all duration-300"
-          >
-            Explore
-          </motion.button>
+          <Button variant='glow'>Explore</Button>
         </div>
 
         {/* Lottie Animation */}
