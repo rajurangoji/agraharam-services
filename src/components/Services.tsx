@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import horoscope from '../assets/horoscope.jpg';
-import Donations from '../assets/Donations.jpg';
-import birth_chart from '../assets/birth_chart.jpg';
-import Catering from '../assets/catring.jpg';
-import education from '../assets/education.jpg'
-
+import horoscope from "../assets/horoscope.jpg";
+import Donations from "../assets/Donations.jpg";
+import birth_chart from "../assets/birth_chart.jpg";
+import Catering from "../assets/catring.jpg";
+import education from "../assets/education.jpg";
+import { useNavigate } from "react-router";
 
 const services = [
   {
@@ -47,9 +47,11 @@ const services = [
 
 const Services = () => {
   const [currentIndex, setCurrentIndex] = useState(2); // Default to center
+  const navigate = useNavigate();
 
   const getPosition = (index: number) => {
-    const offset = (index - currentIndex + services.length+2) % services.length; // Handle circular shifting
+    const offset =
+      (index - currentIndex + services.length + 2) % services.length; // Handle circular shifting
     const positions = [
       { rotate: -25, x: "-90%", y: "10%", scale: 0.8, zIndex: 1 },
       { rotate: -10, x: "-50%", y: "0%", scale: 0.9, zIndex: 2 },
@@ -113,8 +115,15 @@ const Services = () => {
                 className="w-full max-h-[350px] object-cover rounded-lg border border-[#D8B4FE]"
               />
             </div>
-            <p className="text-white/80">{services[currentIndex].description}</p>
+            <p className="text-white/80">
+              {services[currentIndex].description}
+            </p>
           </motion.div>
+        </div>
+        <div className="flex items-center justify-end mt-10 pr-10">
+          <button onClick={() => navigate("services")}>
+            View More Services
+          </button>
         </div>
       </div>
     </section>

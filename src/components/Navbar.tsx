@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-scroll";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 import { motion, AnimatePresence } from "framer-motion";
 
 const Navbar = ({ activeSection }: { activeSection: string }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolling, setScrolling] = useState(false);
+  const navigate = useNavigate(); // Initialize navigation
 
   useEffect(() => {
     const handleScroll = () => {
@@ -53,15 +55,19 @@ const Navbar = ({ activeSection }: { activeSection: string }) => {
                     ? "text-violet-400 font-bold"
                     : "text-gray-300"
                 }`}
+                onClick={() => {
+                  if (item === "Services") {
+                    navigate("/services"); // Navigate to /services
+                  }
+                }}
               >
-                <Link
-                  to={item.toLowerCase()}
-                  smooth={true}
-                  duration={500}
-                  offset={-70}
-                >
-                  {item}
-                </Link>
+                {item === "Services" ? (
+                  <span>{item}</span>
+                ) : (
+                  <Link to={item.toLowerCase()} smooth={true} duration={500} offset={-70}>
+                    {item}
+                  </Link>
+                )}
               </motion.li>
             )
           )}
@@ -101,16 +107,26 @@ const Navbar = ({ activeSection }: { activeSection: string }) => {
                       ? "text-violet-400 font-bold"
                       : "text-gray-300"
                   }`}
+                  onClick={() => {
+                    if (item === "Services") {
+                      navigate("/services");
+                      handleMenuClick();
+                    }
+                  }}
                 >
-                  <Link
-                    to={item.toLowerCase()}
-                    smooth={true}
-                    duration={500}
-                    offset={-70}
-                    onClick={handleMenuClick}
-                  >
-                    {item}
-                  </Link>
+                  {item === "Services" ? (
+                    <span>{item}</span>
+                  ) : (
+                    <Link
+                      to={item.toLowerCase()}
+                      smooth={true}
+                      duration={500}
+                      offset={-70}
+                      onClick={handleMenuClick}
+                    >
+                      {item}
+                    </Link>
+                  )}
                 </motion.li>
               )
             )}
