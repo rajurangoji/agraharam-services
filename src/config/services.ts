@@ -4,7 +4,17 @@ import birth_chart from "../assets/birth_chart.jpg";
 import Catering from "../assets/catring.jpg";
 import education from "../assets/education.jpg";
 import { pandiths } from "./pandiths";
-import { Flame, Sun, Moon, Star, Sparkles, Flower, NotebookIcon as Lotus, Gem, Waves } from "lucide-react"
+import {
+  Flame,
+  Sun,
+  Moon,
+  Star,
+  Sparkles,
+  Flower,
+  NotebookIcon as Lotus,
+  Gem,
+  Waves,
+} from "lucide-react";
 
 export const services_types = [
   {
@@ -25,6 +35,7 @@ export const services_types = [
               "Dedicated to Lord Ganesha, this puja removes obstacles and brings success to new beginnings. It's performed before starting any important venture or ceremony.",
             pandith_details: [pandiths.ratnakarRao, pandiths.nameRao],
             icon: Lotus,
+            
           },
           {
             id: "2",

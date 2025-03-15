@@ -18,6 +18,7 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router";
 
 // Map for icon components
 const iconMap = {
@@ -36,6 +37,7 @@ const iconMap = {
 };
 
 const SelectedService = ({ id }: { id?: string }) => {
+  const navigate = useNavigate();
   const decodedId = id ? decodeURIComponent(id) : null;
   const service = services_types.find(
     (s) => s.path === decodedId || s.path === "Pujas and Pariharas"
@@ -179,7 +181,13 @@ const SelectedService = ({ id }: { id?: string }) => {
 
                       <Button
                         className="w-full mt-4 bg-[#2A2654] hover:bg-[#3A3664] text-[#D8B4FE] border border-[#3A3664]"
-                        variant="outline"
+                        onClick={() => {
+                          const encodedServicePath = encodeURIComponent(service.path);
+                          const encodedPujaType = encodeURIComponent(puja.puja_type);
+                      
+                          // Navigate to the booking page with only the selected puja
+                          navigate(`/services/${encodedServicePath}/book/${encodedPujaType}`);
+                        }}
                       >
                         Book Consultation
                       </Button>
