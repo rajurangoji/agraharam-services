@@ -15,6 +15,11 @@ import {
   Gem,
   Waves,
 } from "lucide-react";
+import ganapathiPuja from "./pujas/ganapathi_puja";
+import navagrahaPuja from "./pujas/navagraha_puja";
+import saraswatiPuja from "./pujas/saraswati_puja";
+import lakshmiPuja from "./pujas/lakshmi_puja";
+import durgaPuja from "./pujas/durga_puja";
 
 export const services_types = [
   {
@@ -35,7 +40,7 @@ export const services_types = [
               "Dedicated to Lord Ganesha, this puja removes obstacles and brings success to new beginnings. It's performed before starting any important venture or ceremony.",
             pandith_details: [pandiths.ratnakarRao, pandiths.nameRao],
             icon: Lotus,
-            
+            details: [ganapathiPuja],
           },
           {
             id: "2",
@@ -44,6 +49,7 @@ export const services_types = [
               "This puja is performed to appease the nine planetary deities to mitigate their negative influences and enhance positive effects in one's life and career.",
             pandith_details: [pandiths.nameHere],
             icon: Sun,
+            details: [navagrahaPuja],
           },
           {
             id: "3",
@@ -52,6 +58,7 @@ export const services_types = [
               "Dedicated to Goddess Saraswati, this puja brings knowledge, wisdom, and excellence in education. Ideal for students and those seeking intellectual growth.",
             pandith_details: [pandiths.nameHere],
             icon: Flower,
+            details: [saraswatiPuja],
           },
           {
             id: "4",
@@ -60,6 +67,7 @@ export const services_types = [
               "This puja invokes Goddess Lakshmi to bring prosperity, wealth, and abundance. It's especially beneficial for business growth and financial stability.",
             pandith_details: [pandiths.ratnakarRao, pandiths.nameRao],
             icon: Sparkles,
+            details: [lakshmiPuja],
           },
           {
             id: "5",
@@ -68,6 +76,7 @@ export const services_types = [
               "Honoring Goddess Durga, this powerful puja provides protection, removes negative energies, and gives strength to overcome life's challenges.",
             pandith_details: [pandiths.nameHere],
             icon: Flame,
+            details: [durgaPuja],
           },
         ],
       },
