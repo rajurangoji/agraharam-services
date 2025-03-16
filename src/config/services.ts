@@ -40,7 +40,7 @@ export const services_types = [
               "Dedicated to Lord Ganesha, this puja removes obstacles and brings success to new beginnings. It's performed before starting any important venture or ceremony.",
             pandith_details: [pandiths.ratnakarRao, pandiths.nameRao],
             icon: Lotus,
-            details: [ganapathiPuja],
+            details: ganapathiPuja,
           },
           {
             id: "2",
@@ -49,7 +49,7 @@ export const services_types = [
               "This puja is performed to appease the nine planetary deities to mitigate their negative influences and enhance positive effects in one's life and career.",
             pandith_details: [pandiths.nameHere],
             icon: Sun,
-            details: [navagrahaPuja],
+            details: navagrahaPuja,
           },
           {
             id: "3",
@@ -58,7 +58,7 @@ export const services_types = [
               "Dedicated to Goddess Saraswati, this puja brings knowledge, wisdom, and excellence in education. Ideal for students and those seeking intellectual growth.",
             pandith_details: [pandiths.nameHere],
             icon: Flower,
-            details: [saraswatiPuja],
+            details: saraswatiPuja,
           },
           {
             id: "4",
@@ -67,7 +67,7 @@ export const services_types = [
               "This puja invokes Goddess Lakshmi to bring prosperity, wealth, and abundance. It's especially beneficial for business growth and financial stability.",
             pandith_details: [pandiths.ratnakarRao, pandiths.nameRao],
             icon: Sparkles,
-            details: [lakshmiPuja],
+            details: lakshmiPuja,
           },
           {
             id: "5",
@@ -76,7 +76,7 @@ export const services_types = [
               "Honoring Goddess Durga, this powerful puja provides protection, removes negative energies, and gives strength to overcome life's challenges.",
             pandith_details: [pandiths.nameHere],
             icon: Flame,
-            details: [durgaPuja],
+            details: durgaPuja,
           },
         ],
       },
@@ -90,6 +90,7 @@ export const services_types = [
               "This ritual neutralizes the negative effects of Kala Sarpa Yoga, which occurs when all planets are positioned between Rahu and Ketu, causing obstacles in life.",
             pandith_details: [pandiths.ratnakarRao, pandiths.nameRao],
             icon: Waves,
+            details: durgaPuja,
           },
           {
             id: "2",
@@ -98,6 +99,7 @@ export const services_types = [
               "This parihara remedies the negative effects of Mars (Mangal) in the birth chart, which can affect marriage and relationships if unfavorably positioned.",
             pandith_details: [pandiths.nameHere],
             icon: Star,
+            details: durgaPuja,
           },
           {
             id: "3",
@@ -106,6 +108,7 @@ export const services_types = [
               "This ritual appeases ancestral spirits and resolves issues caused by unfulfilled obligations to ancestors, bringing peace and removing obstacles.",
             pandith_details: [pandiths.nameHere],
             icon: Moon,
+            details: durgaPuja,
           },
           {
             id: "4",
@@ -114,6 +117,7 @@ export const services_types = [
               "This parihara mitigates the challenging effects of Saturn (Shani) in one's horoscope, reducing delays, hardships, and bringing stability to life.",
             pandith_details: [pandiths.ratnakarRao],
             icon: Gem,
+            details: durgaPuja,
           },
         ],
       },
