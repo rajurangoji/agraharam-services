@@ -1,4 +1,4 @@
-import { Routes, Route, useParams } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import MainLayout from "./components/MainLayout";
 import ServicesPage from "./components/Services/ServicesPage";
 import ComponentsPage from "./ComponentsPage";
