@@ -1,4 +1,4 @@
-import Donation from "../assets/images/donation.png";
+import Donation from "../assets/donations_main.jpg";
 
 export const pandiths = {
   ratnakarRao: {
