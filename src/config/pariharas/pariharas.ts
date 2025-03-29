@@ -112,6 +112,7 @@ const shaniDoshaParihara = {
   ],
 };
 
+
 export {
   kalaSarpaDoshaParihara,
   mangalDoshaParihara,
