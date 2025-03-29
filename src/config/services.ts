@@ -1,5 +1,5 @@
 import horoscope from "../assets/horoscope.jpg";
-import Donations from "../assets/Donations.jpg";
+import Donations from "../assets/donations.jpg";
 import birth_chart from "../assets/birth_chart.jpg";
 import Catering from "../assets/catring.jpg";
 import education from "../assets/education.jpg";

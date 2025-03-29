@@ -1,4 +1,4 @@
-import bg_img from "../assets/Unknown-8.jpg";
+import home_bg from "../assets/home_bg_image.jpg";
 import { Button } from "./ui/button";
 
 const Home = () => {
@@ -10,7 +10,7 @@ const Home = () => {
       {/* Background Image with Dark Overlay */}
       <div className="absolute inset-0 w-full h-full overflow-hidden">
         <img
-          src={bg_img}
+          src={home_bg}
           alt="Background"
           className="w-full h-full object-cover"
         />
