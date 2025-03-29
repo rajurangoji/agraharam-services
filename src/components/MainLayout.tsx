@@ -29,33 +29,33 @@ function MainLayout() {
       }, []);
     
   return (
-    <div className="relative">
-    <Navbar activeSection={activeSection} />
+    <div className="relative flex flex-col min-h-screen">
+      <Navbar activeSection={activeSection} />
 
-    {/* Hero Section */}
-    <div className="relative w-full h-screen overflow-hidden">
-      <Home />
+      {/* Hero Section */}
+      <div className="relative w-full h-screen overflow-hidden flex items-center justify-center">
+        <Home />
+      </div>
+
+      {/* Sections */}
+      <section id="services">
+        <Services />
+      </section>
+
+      <section id="about" >
+        <AboutUs />
+      </section>
+
+      <section id="testimonials">
+        <Testimonials />
+      </section>
+
+      <section id="contact">
+        <ContactUs />
+      </section>
+
+      <Footer />
     </div>
-
-    {/* Sections */}
-    <section id="services">
-      <Services />
-    </section>
-
-    <section id="about">
-      <AboutUs />
-    </section>
-
-    <section id="testimonials">
-      <Testimonials />
-    </section>
-
-    <section id="contact">
-      <ContactUs />
-    </section>
-
-    <Footer />
-  </div>
   );
 }
 

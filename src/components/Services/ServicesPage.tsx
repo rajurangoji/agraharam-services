@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { services_types } from "@/config/services";
 import { useNavigate } from "react-router";
+import Footer from "../Footer";
 
 const ServicesPage = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -82,6 +83,9 @@ const ServicesPage = () => {
             </div>
           </div>
         ))}
+      </div>
+      <div className="mt-10">
+        <Footer />
       </div>
     </div>
   );

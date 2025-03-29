@@ -3,7 +3,7 @@ import { Link } from "react-scroll";
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-white py-12">
+    <footer className=" bg-[#0D0C1D] text-[#B4A5D0] py-12">
       <div className="max-w-screen-xl mx-auto px-6 lg:px-16">
         <div className="flex flex-col lg:flex-row justify-between items-center space-y-8 lg:space-y-0">
           {/* Footer Logo & Description */}

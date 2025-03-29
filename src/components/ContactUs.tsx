@@ -1,20 +1,8 @@
-import { motion } from "framer-motion";
-
 const ContactUs = () => {
-  // Unified transition settings
-  const fadeInUp = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
-  };
-
   return (
-    <motion.section
+    <section
       id="contact"
-      className="py-16 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-white"
-      initial="hidden"
-      whileInView="visible"
-      variants={fadeInUp}
-      viewport={{ once: false, amount: 0.3 }}
+      className="min-h-screen bg-[#0D0C1D] text-[#B4A5D0] py-12"
     >
       <div className="max-w-screen-xl mx-auto px-6 lg:px-16">
         <h2 className="text-4xl font-semibold text-center mb-12 text-violet-400 font-iora">
@@ -23,10 +11,7 @@ const ContactUs = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Form */}
-          <motion.div
-            className="bg-gradient-to-r from-gray-800 to-gray-700 p-8 rounded-2xl shadow-lg"
-            variants={fadeInUp}
-          >
+          <div className="bg-gradient-to-r from-gray-800 to-gray-700 p-8 rounded-2xl shadow-lg">
             <h3 className="text-2xl font-semibold mb-6 text-violet-300">
               Get in Touch
             </h3>
@@ -71,13 +56,10 @@ const ContactUs = () => {
                 Submit
               </button>
             </form>
-          </motion.div>
+          </div>
 
           {/* Contact Information */}
-          <motion.div
-            className="bg-gradient-to-r from-gray-800 to-gray-700 p-8 rounded-2xl shadow-lg"
-            variants={fadeInUp}
-          >
+          <div className="bg-gradient-to-r from-gray-800 to-gray-700 p-8 rounded-2xl shadow-lg">
             <h3 className="text-2xl font-semibold mb-6 text-violet-300">
               Our Contact Information
             </h3>
@@ -102,10 +84,10 @@ const ContactUs = () => {
                 </a>
               ))}
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
-    </motion.section>
+    </section>
   );
 };
 
