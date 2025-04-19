@@ -7,7 +7,6 @@ const AboutUs = () => {
         </h2>
 
         <div className="flex flex-col lg:flex-row gap-12">
-          {/* Left Section: Who We Are */}
           <div className="lg:w-1/2">
             <h3 className="text-3xl font-semibold text-primary-voilet mb-6 font-iora">
               Who We Are
@@ -29,7 +28,6 @@ const AboutUs = () => {
             </div>
           </div>
 
-          {/* Right Section: Our Services */}
           <div className="lg:w-1/2">
             <h3 className="text-3xl font-semibold text-primary-voilet mb-6 font-iora">
               Our Services
