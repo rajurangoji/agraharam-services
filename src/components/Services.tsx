@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { services_types } from "@/config/services";
+import { imagePositions, services_types } from "@/config/services";
 import { useNavigate } from "react-router";
 import { Button } from "./ui/button";
 
@@ -11,16 +11,7 @@ const Services = () => {
     const offset =
       (index - currentIndex + services_types.length + 2) %
       services_types.length;
-
-    const positions = [
-      { rotate: -25, x: "-90%", y: "10%", scale: 0.8, zIndex: 1 },
-      { rotate: -10, x: "-50%", y: "0%", scale: 0.9, zIndex: 2 },
-      { rotate: 0, x: "0%", y: "0%", scale: 1, zIndex: 3 }, // Center
-      { rotate: 10, x: "50%", y: "0%", scale: 0.9, zIndex: 2 },
-      { rotate: 25, x: "90%", y: "10%", scale: 0.8, zIndex: 1 },
-    ];
-
-    return positions[offset];
+    return imagePositions[offset];
   };
 
   return (

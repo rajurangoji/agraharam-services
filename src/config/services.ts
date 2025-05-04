@@ -20,8 +20,13 @@ import navagrahaPuja from "./pujas/navagraha_puja";
 import saraswatiPuja from "./pujas/saraswati_puja";
 import lakshmiPuja from "./pujas/lakshmi_puja";
 import durgaPuja from "./pujas/durga_puja";
-import { kalaSarpaDoshaParihara, mangalDoshaParihara, pitruDoshaParihara, shaniDoshaParihara } from "./pariharas/pariharas";
-
+import {
+  kalaSarpaDoshaParihara,
+  mangalDoshaParihara,
+  pitruDoshaParihara,
+  shaniDoshaParihara,
+} from "./pariharas/pariharas";
+import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
 
 export const services_types = [
   {
@@ -158,5 +163,74 @@ export const services_types = [
       "Access to articles, videos, and guides about astrology, zodiac signs, and horoscopes. Information on compatibility analyses and career guidance.",
     image: education,
     path: "Educational Resources",
+  },
+];
+
+export const allServices = [
+  "Home",
+  "Services",
+  "About",
+  "Testimonials",
+  "Contact",
+];
+
+export const imagePositions = [
+  { rotate: -25, x: "-90%", y: "10%", scale: 0.8, zIndex: 1 },
+  { rotate: -10, x: "-50%", y: "0%", scale: 0.9, zIndex: 2 },
+  { rotate: 0, x: "0%", y: "0%", scale: 1, zIndex: 3 }, // Center
+  { rotate: 10, x: "50%", y: "0%", scale: 0.9, zIndex: 2 },
+  { rotate: 25, x: "90%", y: "10%", scale: 0.8, zIndex: 1 },
+];
+
+export const testimonials = [
+  {
+    name: "John Doe",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnK_tOlfiqDOcSjABOkABNdU67X7IFuRBan9J5Mq4LahZAtuy0XSK87oZCR3V9F33IssM&usqp=CAU",
+    shortTestimonial:
+      "The services provided were excellent. I received accurate horoscope predictions.",
+    fullTestimonial:
+      "The horoscope predictions were spot on. The remedies recommended have really helped me with my daily life. I'm thankful for the personalized approach and insights shared.",
+  },
+  {
+    name: "Jane Smith",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnK_tOlfiqDOcSjABOkABNdU67X7IFuRBan9J5Mq4LahZAtuy0XSK87oZCR3V9F33IssM&usqp=CAU",
+    shortTestimonial:
+      "A great experience. The birth chart reading was detailed and insightful.",
+    fullTestimonial:
+      "The birth chart reading provided a clear understanding of my strengths and challenges in life. It helped me with my career and personal decisions. Highly recommend!",
+  },
+  {
+    name: "Michael Brown",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnK_tOlfiqDOcSjABOkABNdU67X7IFuRBan9J5Mq4LahZAtuy0XSK87oZCR3V9F33IssM&usqp=CAU",
+    shortTestimonial:
+      "The remedies were easy to follow, and I noticed a positive change in my life.",
+    fullTestimonial:
+      "The remedies and suggestions given by the astrologer were practical and effective. It has positively impacted my life. Thank you for your guidance!",
+  },
+];
+
+export const socialMediaLinks = [
+  {
+    icon: FaFacebook,
+    link: "https://facebook.com",
+    color: "hover:text-blue-500",
+  },
+  {
+    icon: FaTwitter,
+    link: "https://twitter.com",
+    color: "hover:text-blue-400",
+  },
+  {
+    icon: FaInstagram,
+    link: "https://instagram.com",
+    color: "hover:text-pink-500",
+  },
+  {
+    icon: FaLinkedin,
+    link: "https://linkedin.com",
+    color: "hover:text-blue-700",
   },
 ];

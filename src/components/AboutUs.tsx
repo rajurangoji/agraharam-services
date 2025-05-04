@@ -9,7 +9,7 @@ const AboutUs = () => {
         <div className="flex flex-col lg:flex-row gap-12">
           <div className="lg:w-1/2">
             <h3 className="text-3xl font-semibold text-primary-voilet mb-6 font-iora">
-              Who We Are
+              Who We Are test
             </h3>
             <p className="text-lg text-neutral-200 leading-relaxed font-light">
               Agraharam is a trusted platform offering astrology-based services

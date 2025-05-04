@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-scroll";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
 import { motion, AnimatePresence } from "framer-motion";
+import { allServices } from "@/config/services";
 
 const Navbar = ({ activeSection }: { activeSection: string }) => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -18,7 +19,8 @@ const Navbar = ({ activeSection }: { activeSection: string }) => {
   }, []);
 
   const handleMenuClick = () => {
-    setMenuOpen(false); // Close the menu when an item is clicked
+    navigate("/services");
+    setMenuOpen(false);
   };
 
   return (
@@ -44,33 +46,36 @@ const Navbar = ({ activeSection }: { activeSection: string }) => {
 
         {/* Desktop Menu */}
         <ul className="hidden lg:flex space-x-6">
-          {["Home", "Services", "About", "Testimonials", "Contact"].map(
-            (item, index) => (
-              <motion.li
-                key={index}
-                whileHover={{ scale: 1.1, color: "#B2AFFE" }}
-                transition={{ duration: 0.3 }}
-                className={`cursor-pointer font-iora transition-all ${
-                  activeSection === item.toLowerCase()
-                    ? "text-violet-400 font-bold"
-                    : "text-gray-300"
-                }`}
-                onClick={() => {
-                  if (item === "Services") {
-                    navigate("/services"); // Navigate to /services
-                  }
-                }}
-              >
-                {item === "Services" ? (
-                  <span>{item}</span>
-                ) : (
-                  <Link to={item.toLowerCase()} smooth={true} duration={500} offset={-70}>
-                    {item}
-                  </Link>
-                )}
-              </motion.li>
-            )
-          )}
+          {allServices.map((item, index) => (
+            <motion.li
+              key={index}
+              whileHover={{ scale: 1.1, color: "#B2AFFE" }}
+              transition={{ duration: 0.3 }}
+              className={`cursor-pointer font-iora transition-all ${
+                activeSection === item.toLowerCase()
+                  ? "text-violet-400 font-bold"
+                  : "text-gray-300"
+              }`}
+              onClick={() => {
+                if (item === "Services") {
+                  navigate("/services"); // Navigate to /services
+                }
+              }}
+            >
+              {item === "Services" ? (
+                <span>{item}</span>
+              ) : (
+                <Link
+                  to={item.toLowerCase()}
+                  smooth={true}
+                  duration={500}
+                  offset={-70}
+                >
+                  {item}
+                </Link>
+              )}
+            </motion.li>
+          ))}
         </ul>
 
         {/* Hamburger Menu (Mobile) */}
@@ -96,40 +101,37 @@ const Navbar = ({ activeSection }: { activeSection: string }) => {
             transition={{ duration: 0.5 }}
             className="lg:hidden space-y-4 text-white bg-gray-900/90 p-6 rounded-lg absolute top-16 left-0 w-full text-center"
           >
-            {["Home", "Services", "About", "Testimonials", "Contact"].map(
-              (item, index) => (
-                <motion.li
-                  key={index}
-                  whileHover={{ scale: 1.1, color: "#B2AFFE" }}
-                  transition={{ duration: 0.3 }}
-                  className={`cursor-pointer font-iora transition-all ${
-                    activeSection === item.toLowerCase()
-                      ? "text-violet-400 font-bold"
-                      : "text-gray-300"
-                  }`}
-                  onClick={() => {
-                    if (item === "Services") {
-                      navigate("/services");
-                      handleMenuClick();
-                    }
-                  }}
-                >
-                  {item === "Services" ? (
-                    <span>{item}</span>
-                  ) : (
-                    <Link
-                      to={item.toLowerCase()}
-                      smooth={true}
-                      duration={500}
-                      offset={-70}
-                      onClick={handleMenuClick}
-                    >
-                      {item}
-                    </Link>
-                  )}
-                </motion.li>
-              )
-            )}
+            {allServices.map((item, index) => (
+              <motion.li
+                key={index}
+                whileHover={{ scale: 1.1, color: "#B2AFFE" }}
+                transition={{ duration: 0.3 }}
+                className={`cursor-pointer font-iora transition-all ${
+                  activeSection === item.toLowerCase()
+                    ? "text-violet-400 font-bold"
+                    : "text-gray-300"
+                }`}
+                onClick={() => {
+                  if (item === "Services") {
+                    handleMenuClick();
+                  }
+                }}
+              >
+                {item === "Services" ? (
+                  <span>{item}</span>
+                ) : (
+                  <Link
+                    to={item.toLowerCase()}
+                    smooth={true}
+                    duration={500}
+                    offset={-70}
+                    onClick={handleMenuClick}
+                  >
+                    {item}
+                  </Link>
+                )}
+              </motion.li>
+            ))}
           </motion.div>
         )}
       </AnimatePresence>

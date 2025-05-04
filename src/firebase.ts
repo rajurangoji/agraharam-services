@@ -1,17 +1,40 @@
-// Import the functions you need from the SDKs you need
-// import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+// src/firebase.ts
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+import { getAnalytics, isSupported } from "firebase/analytics";
 
-// Your web app's Firebase configuration
+// Your Firebase configuration
 // const firebaseConfig = {
-//   apiKey: "AIzaSyAFe3nVx5Ca-Lruklia3N5OZg62873FoqQ",
-//   authDomain: "agraharamservices-f6dd7.firebaseapp.com",
-//   projectId: "agraharamservices-f6dd7",
-//   storageBucket: "agraharamservices-f6dd7.firebasestorage.app",
-//   messagingSenderId: "92944339356",
-//   appId: "1:92944339356:web:50c9c74b400e3b5a5ff859"
+//   apiKey: "AIzaSyCbMEkd8mXCeZn8Dw_dbLEB32A1XxZUovY",
+//   authDomain: "agraharammainservice.firebaseapp.com",
+//   projectId: "agraharammainservice",
+//   storageBucket: "agraharammainservice.appspot.com",
+//   messagingSenderId: "370032254204",
+//   appId: "1:370032254204:web:66dae1927fb9073deacb79",
+//   measurementId: "G-W5QEHF6KK7",
 // };
 
-// Initialize Firebase
-// const app = initializeApp(firebaseConfig);
+const firebaseConfig = {
+    apiKey: "AIzaSyCbMEkd8mXCeZn8Dw_dbLEB32A1XxZUovY",
+    authDomain: "agraharammainservice.firebaseapp.com",
+    projectId: "agraharammainservice",
+    storageBucket: "agraharammainservice.firebasestorage.app",
+    messagingSenderId: "370032254204",
+    appId: "1:370032254204:web:66dae1927fb9073deacb79",
+    measurementId: "G-W5QEHF6KK7"
+  };
+
+const app = initializeApp(firebaseConfig);
+
+// Initialize Firestore
+const db = getFirestore(app);
+
+// Initialize Analytics (only if supported by the environment)
+let analytics: ReturnType<typeof getAnalytics> | undefined = undefined;
+isSupported().then((yes) => {
+  if (yes) {
+    analytics = getAnalytics(app);
+  }
+});
+
+export { db, analytics };
