@@ -29,7 +29,7 @@ const ServicesPage = () => {
   }, []);
 
   const onChangeService = (path: string) => {
-    const encodedPath = encodeURIComponent(path); // ✅ Ensure it's encoded
+    const encodedPath = encodeURIComponent(path);
     navigate(`/services/${encodedPath}`);
   };
 
@@ -76,7 +76,7 @@ const ServicesPage = () => {
               </p>
               <button
                 className="mt-6 px-6 py-3 bg-[#D8B4FE] text-[#0d0e27] font-bold rounded-lg shadow-md transition-all duration-300 hover:bg-[#b38de3]"
-                onClick={() => onChangeService(service.path)} // ✅ Use `path`
+                onClick={() => onChangeService(service.path)}
               >
                 Learn More
               </button>
