@@ -20,7 +20,7 @@ const AboutUs = () => {
             <h3 className="text-4xl font-semibold text-primary-voilet mb-6 mt-8">
               Who We Are
             </h3>
-            <p className=" text-lg text-neutral-200 leading-relaxed font-light text-justify">
+            <p className="mb-4 text-lg text-neutral-200 leading-relaxed font-light text-justify">
               Agraharam is a trusted platform offering astrology-based services
               and Brahmin catering services. Our offerings include horoscope
               predictions, personalized birth chart generation, spiritual
@@ -28,7 +28,6 @@ const AboutUs = () => {
               spiritual insights and authentic experiences to our customers
               through astrology, zodiac insights, and traditional food services.
             </p>
-            <br></br>
             <p className="text-lg text-neutral-200 leading-relaxed font-light text-justify">
             With a deep respect for tradition and a commitment to authenticity, Agraharam bridges the gap between ancient wisdom and modern needs. Whether you're seeking guidance through Vedic astrology or planning a culturally rooted event, our services are designed to offer spiritual clarity and meaningful experiences. From detailed astrological consultations to pure vegetarian Brahmin meals, we uphold the values of purity, precision, and devotion in everything we do.
             </p>
