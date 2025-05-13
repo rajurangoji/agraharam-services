@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="max-w-screen-xl mx-auto px-6 lg:px-16">
         <div className="flex flex-col lg:flex-row justify-between items-center space-y-8 lg:space-y-0">
           <div className="text-center lg:text-left">
-            <h1 className="text-3xl font-bold text-violet-400">Agraharam</h1>
+            <h1 className="text-3xl font-bold text-violet-400">Agraharam Services</h1>
             <p className="text-sm text-gray-400 mt-2">
               Your Trusted Spiritual & Catering Partner
             </p>
