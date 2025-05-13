@@ -25,7 +25,7 @@ const Home = () => {
           Discover the power of ancient rituals and traditions to enhance your life.
         </p>
         <div className="mt-5 sm:mt-6 flex justify-center">
-          <Button variant="glow" className="px-4 py-2 sm:px-6 sm:py-3 text-sm sm:text-base">Explore</Button>
+          <Button variant="glow" className="px-4 py-2 sm:px-6 sm:py-3 text-sm sm:text-base rounded-full">Explore</Button>
         </div>
       </div>
     </section>

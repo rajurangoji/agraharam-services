@@ -41,7 +41,7 @@ const Navbar = ({ activeSection }: { activeSection: string }) => {
           transition={{ duration: 0.3 }}
           className="text-2xl font-bold font-iora cursor-pointer"
         >
-          Agraharam
+          Agraharam Services
         </motion.h1>
 
         {/* Desktop Menu */}

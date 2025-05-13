@@ -60,12 +60,11 @@ const Services = () => {
       if (i >= words.length) {
         clearInterval(interval);
       }
-    }, 300); // 300ms per word
+    }, 300); 
 
     return () => clearInterval(interval);
   }, [currentIndex]);
 
-  // Handle left and right arrow clicks
   const handleArrowClick = (direction: "left" | "right") => {
     setCurrentIndex((prevIndex) => {
       if (direction === "left") {
@@ -83,11 +82,11 @@ const Services = () => {
       className="py-16 bg-[#13142e] text-primary-voilet w-full overflow-hidden"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-16 flex flex-col items-center">
-        <h2 className="text-4xl lg:text-5xl font-bold text-center mb-12 text-primary-voilet">
+        <h2 className="text-4xl lg:text-5xl font-bold text-center mb-4 text-primary-voilet">
           Our Services
         </h2>
 
-        <div className="flex items-center justify-center w-full mb-10">
+        <div className="flex items-center justify-center w-full mb-5">
           <h3 className="text-xl lg:text-3xl text-white font-bold">
             {services_types[currentIndex].title}
           </h3>
@@ -100,27 +99,29 @@ const Services = () => {
 
             return (
               <div
-                key={index}
-                className="absolute w-[300px] sm:w-[400px] md:w-[250px] lg:w-[350px] h-[270px] sm:h-[300px] md:h-[320px] lg:h-[400px] rounded-lg cursor-pointer transition-transform duration-500 ease-in-out"
-                onClick={() => setCurrentIndex(index)}
-                style={{
-                  transform: `translate(${x}, ${y}) rotate(${rotate}deg) scale(${scale})`,
-                  zIndex,
-                }}
-              >
-                <img
-                  src={service.image}
-                  alt={service.title}
-                  className="w-full h-full object-cover rounded-lg shadow-lg border border-[#D8B4FE]"
-                />
-              </div>
+  key={index}
+  className={`absolute w-[300px] sm:w-[400px] md:w-[250px] lg:w-[350px] h-[270px] sm:h-[300px] md:h-[320px] lg:h-[400px] rounded-lg cursor-pointer transition-all duration-700 ease-in-out`}
+  onClick={() => setCurrentIndex(index)}
+  style={{
+    transform: `translate(${x}, ${y}) rotate(${rotate}deg) scale(${scale})`,
+    zIndex,
+    filter: index === currentIndex ? "none" : "blur(3px)",
+  }}
+>
+  <img
+    src={service.image}
+    alt={service.title}
+    className="w-full h-full object-cover rounded-lg shadow-lg border border-[#D8B4FE]"
+  />
+</div>
+
             );
           })}
 
           
           <button
             onClick={() => handleArrowClick("right")}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white bg-opacity-70 bg-primary-voilet hover:bg-opacity-90 hover:text-white transition-all duration-300 z-50 p-4 rounded-full shadow-lg hover:shadow-2xl hover:border-2 hover:border-primary-voilet"
+            className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white bg-opacity-70 bg-primary-voilet hover:bg-opacity-90 hover:text-white transition-all duration-300 z-30 p-4 rounded-full shadow-lg hover:shadow-2xl hover:border-2 hover:border-primary-voilet"
             
           >
             <ChevronRight className="w-7 h-7" /> 
@@ -128,14 +129,14 @@ const Services = () => {
 
           <button
             onClick={() => handleArrowClick("left")}
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white  bg-primary-voilet bg-opacity-70 hover:bg-opacity-90 hover:text-white transition-all duration-300 z-50 p-4 rounded-full shadow-lg hover:shadow-2xl hover:border-2 hover:border-primary-voilet"
+            className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white  bg-primary-voilet bg-opacity-70 hover:bg-opacity-90 hover:text-white transition-all duration-300 z-30 p-4 rounded-full shadow-lg hover:shadow-2xl hover:border-2 hover:border-primary-voilet"
             
           >
             <ChevronLeft className="w-7 h-7" /> 
           </button>
         </div>
 
-        <div className="my-14 w-full lg:w-3/4 bg-[#1c1f3b] p-6 rounded-lg shadow-2xl border border-white/20">
+        <div className="my-8 w-full lg:w-3/4 bg-[#1c1f3b] p-6 rounded-lg shadow-2xl border border-white/20">
           <p className="text-white/80 text-center leading-relaxed flex flex-wrap justify-center gap-x-1 whitespace-pre-wrap min-h-[80px]">
             {services_types[currentIndex].description.split(" ").map((word, index) => (
               <span
@@ -152,7 +153,7 @@ const Services = () => {
           </p>
         </div>
 
-        <div className="flex items-center justify-end mt-1">
+        <div className="flex items-center justify-end">
           <Button
             variant="glow"
             onClick={() => navigate("services")}
