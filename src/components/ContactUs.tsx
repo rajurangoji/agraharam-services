@@ -1,28 +1,56 @@
+import emailjs from "emailjs-com";
+import { useRef } from "react";
+
 const ContactUs = () => {
+  const form = useRef<HTMLFormElement>(null);
+
+  const sendEmail = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!form.current) return;
+
+    emailjs
+      .sendForm(
+        "service_ula87lq",     // Replace with your EmailJS service ID
+        "template_2wmkwwu",    // Replace with your EmailJS template ID
+        form.current,
+        "oqw7aP2dyDq6jxo-f"         // Replace with your EmailJS public key (user ID)
+      )
+      .then(
+        () => {
+          alert("Message sent successfully!");
+          form.current?.reset();
+        },
+        (error) => {
+          alert("Failed to send message. Please try again.");
+          console.error(error);
+        }
+      );
+  };
+
   return (
     <section
       id="contact"
       className="min-h-screen bg-[#0D0C1D] text-[#B4A5D0] py-12"
     >
       <div className="max-w-screen-xl mx-auto px-6 lg:px-16">
-        <h2 className="text-4xl font-semibold text-center mb-12 text-violet-400 font-iora">
-          Contact Us
-        </h2>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div className="bg-gradient-to-r from-gray-800 to-gray-700 p-8 rounded-2xl shadow-lg">
             <h3 className="text-2xl font-semibold mb-6 text-violet-300">
               Get in Touch
             </h3>
-            <form>
+
+            <form ref={form} onSubmit={sendEmail}>
               <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-300">
                   Name
                 </label>
                 <input
                   type="text"
-                  className="w-full mt-2 px-4 py-3 border border-gray-600 rounded-md bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-violet-500"
+                  name="from_name"
                   required
+                  className="w-full mt-2 px-4 py-3 border border-gray-600 rounded-md bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-violet-500"
                 />
               </div>
 
@@ -32,8 +60,9 @@ const ContactUs = () => {
                 </label>
                 <input
                   type="email"
-                  className="w-full mt-2 px-4 py-3 border border-gray-600 rounded-md bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-violet-500"
+                  name="from_email"
                   required
+                  className="w-full mt-2 px-4 py-3 border border-gray-600 rounded-md bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-violet-500"
                 />
               </div>
 
@@ -43,8 +72,9 @@ const ContactUs = () => {
                 </label>
                 <textarea
                   rows={4}
-                  className="w-full mt-2 px-4 py-3 border border-gray-600 rounded-md bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-violet-500"
+                  name="message"
                   required
+                  className="w-full mt-2 px-4 py-3 border border-gray-600 rounded-md bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-violet-500"
                 ></textarea>
               </div>
 
@@ -56,32 +86,7 @@ const ContactUs = () => {
               </button>
             </form>
           </div>
-          <div className="bg-gradient-to-r from-gray-800 to-gray-700 p-8 rounded-2xl shadow-lg">
-            <h3 className="text-2xl font-semibold mb-6 text-violet-300">
-              Our Contact Information
-            </h3>
-            <p className="text-lg mb-4">
-              <strong className="text-violet-400">Address:</strong> 123 Agraharam Street, Cityville, Country
-            </p>
-            <p className="text-lg mb-4">
-              <strong className="text-violet-400">Phone:</strong> +1 (234) 567-890
-            </p>
-            <p className="text-lg mb-4">
-              <strong className="text-violet-400">Email:</strong> info@agraharam.com
-            </p>
-            <div className="flex space-x-6 mt-6">
-              {/* Social Media Links */}
-              {["facebook-f", "twitter", "instagram"].map((icon, index) => (
-                <a
-                  key={index}
-                  href="#"
-                  className="text-violet-400 hover:text-violet-500 text-2xl transition-all"
-                >
-                  <i className={`fab fa-${icon}`}></i>
-                </a>
-              ))}
-            </div>
-          </div>
+
         </div>
       </div>
     </section>
