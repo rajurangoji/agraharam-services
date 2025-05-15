@@ -33,10 +33,7 @@ const ContactUs = () => {
       id="contact"
       className="min-h-screen bg-[#0D0C1D] text-[#B4A5D0] py-10 px-4 sm:px-6"
     >
-      <div className="max-w-screen-xl mx-auto h-full flex flex-col justify-center">
-        <h2 className="text-3xl sm:text-3xl lg:text-5xl font-bold text-center mb-8 sm:mb-10 text-violet-400">
-  Contact Us
-</h2>
+      <div className="max-w-screen-xl mx-auto px-6 lg:px-16">
 
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
