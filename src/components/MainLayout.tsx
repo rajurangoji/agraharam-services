@@ -7,28 +7,29 @@ import ContactUs from "./ContactUs";
 import Footer from "./Footer";
 import AboutUs from "./AboutUs";
 import WhatsAppButton from "./WhatsappButton";
+import Pandiths from "./Pandiths";
 
 function MainLayout() {
-    const [activeSection, setActiveSection] = useState("home");
+  const [activeSection, setActiveSection] = useState("home");
 
-    useEffect(() => {
-        const sections = ["home", "services", "about", "testimonials", "contact"];
-        const handleScroll = () => {
-          sections.forEach((id) => {
-            const element = document.getElementById(id);
-            if (element) {
-              const { top, bottom } = element.getBoundingClientRect();
-              if (top < window.innerHeight / 2 && bottom > window.innerHeight / 2) {
-                setActiveSection(id);
-              }
-            }
-          });
-        };
-    
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-      }, []);
-    
+  useEffect(() => {
+    const sections = ["home", "services", "about", "testimonials", "contact"];
+    const handleScroll = () => {
+      sections.forEach((id) => {
+        const element = document.getElementById(id);
+        if (element) {
+          const { top, bottom } = element.getBoundingClientRect();
+          if (top < window.innerHeight / 2 && bottom > window.innerHeight / 2) {
+            setActiveSection(id);
+          }
+        }
+      });
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <div className="relative flex flex-col min-h-screen">
       <Navbar activeSection={activeSection} />
@@ -40,8 +41,11 @@ function MainLayout() {
         <Services />
       </section>
 
-      <section id="about" >
+      <section id="about">
         <AboutUs />
+      </section>
+      <section id="pandiths">
+        <Pandiths />
       </section>
 
       <section id="testimonials">
