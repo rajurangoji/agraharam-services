@@ -170,6 +170,7 @@ export const allServices = [
   "Home",
   "Services",
   "About",
+  "Pandiths",
   "Testimonials",
   "Contact",
 ];
