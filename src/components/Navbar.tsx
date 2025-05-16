@@ -39,7 +39,7 @@ const Navbar = ({ activeSection }: { activeSection: string }) => {
         <motion.h1
           whileHover={{ scale: 1.1, color: "#D8B4FE" }}
           transition={{ duration: 0.3 }}
-          className="text-2xl font-bold font-iora cursor-pointer"
+          className="text-2xl font-bold font-iora cursor-pointer pr-2"
         >
           Agraharam Services
         </motion.h1>
