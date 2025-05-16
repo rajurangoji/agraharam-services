@@ -73,7 +73,7 @@ const ContactUs = () => {
                 <strong className="text-violet-400">Phone:</strong> +1 (234) 567-890
               </p>
               <p className="text-base mb-3">
-                <strong className="text-violet-400">Email:</strong> info@agraharam.com
+                <strong className="text-violet-400">Email:</strong> agaraharamservices@gmail.com
               </p>
               <div className="flex space-x-5 mt-4 mb-6">
                 {["facebook-f", "twitter", "instagram"].map((icon, index) => (
