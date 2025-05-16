@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { imagePositions, services_types } from "@/config/services";
 import { useNavigate } from "react-router";
 import { Button } from "./ui/button";
-import { ChevronRight, ChevronLeft } from "lucide-react"; 
+import { ChevronRight, ChevronLeft } from "lucide-react";
 
 const Services = () => {
   const [currentIndex, setCurrentIndex] = useState(2);
@@ -11,7 +11,7 @@ const Services = () => {
   const sectionRef = useRef(null);
   const navigate = useNavigate();
 
-  // Detect if the section is in view
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -31,7 +31,7 @@ const Services = () => {
     };
   }, []);
 
-  // Dynamically return positions based on scroll state
+
   const getPosition = (index: number) => {
     if (!isInView) {
       return {
@@ -48,7 +48,7 @@ const Services = () => {
     return imagePositions[offset];
   };
 
-  // Karaoke effect for description
+
   useEffect(() => {
     setHighlightIndex(-1);
     const words = services_types[currentIndex].description.split(" ");
@@ -60,7 +60,7 @@ const Services = () => {
       if (i >= words.length) {
         clearInterval(interval);
       }
-    }, 300); 
+    }, 300);
 
     return () => clearInterval(interval);
   }, [currentIndex]);
@@ -82,70 +82,69 @@ const Services = () => {
       className="py-16 bg-[#13142e] text-primary-voilet w-full overflow-hidden"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-16 flex flex-col items-center">
-        <h2 className="text-4xl lg:text-5xl font-bold text-center mb-4 text-primary-voilet">
+        <h2 className="text-4xl font-bold text-center mb-4 text-primary-voilet">
           Our Services
         </h2>
 
-        <div className="flex items-center justify-center w-full mb-5">
+        <div className="flex items-center justify-center w-full mb-6">
           <h3 className="text-xl lg:text-3xl text-white font-bold">
             {services_types[currentIndex].title}
           </h3>
         </div>
 
-        <div className="relative w-full max-w-lg h-[400px] flex justify-center items-center"> 
-          
+        <div className="relative w-full max-w-lg h-[400px] flex justify-center items-center">
+
           {services_types.map((service, index) => {
             const { rotate, x, y, scale, zIndex } = getPosition(index);
 
             return (
               <div
-  key={index}
-  className={`absolute w-[300px] sm:w-[400px] md:w-[250px] lg:w-[350px] h-[270px] sm:h-[300px] md:h-[320px] lg:h-[400px] rounded-lg cursor-pointer transition-all duration-700 ease-in-out`}
-  onClick={() => setCurrentIndex(index)}
-  style={{
-    transform: `translate(${x}, ${y}) rotate(${rotate}deg) scale(${scale})`,
-    zIndex,
-    filter: index === currentIndex ? "none" : "blur(3px)",
-  }}
->
-  <img
-    src={service.image}
-    alt={service.title}
-    className="w-full h-full object-cover rounded-lg shadow-lg border border-[#D8B4FE]"
-  />
-</div>
+                key={index}
+                className={`absolute w-[300px] sm:w-[400px] md:w-[250px] lg:w-[350px] h-[270px] sm:h-[300px] md:h-[320px] lg:h-[400px] rounded-lg cursor-pointer transition-all duration-1000 ease-in-out`}
+                onClick={() => setCurrentIndex(index)}
+                style={{
+                  transform: `translate(${x}, ${y}) rotate(${rotate}deg) scale(${scale})`,
+                  zIndex,
+                  filter: index === currentIndex ? "none" : "blur(3px)",
+                }}
+              >
+                <img
+                  src={service.image}
+                  alt={service.title}
+                  className="w-full h-full object-cover rounded-lg shadow-lg border border-[#D8B4FE]"
+                />
+              </div>
 
             );
           })}
 
-          
+
           <button
             onClick={() => handleArrowClick("right")}
             className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white bg-opacity-70 bg-primary-voilet hover:bg-opacity-90 hover:text-white transition-all duration-300 z-30 p-4 rounded-full shadow-lg hover:shadow-2xl hover:border-2 hover:border-primary-voilet"
-            
+
           >
-            <ChevronRight className="w-7 h-7" /> 
+            <ChevronRight className="w-7 h-7" />
           </button>
 
           <button
             onClick={() => handleArrowClick("left")}
             className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white  bg-primary-voilet bg-opacity-70 hover:bg-opacity-90 hover:text-white transition-all duration-300 z-30 p-4 rounded-full shadow-lg hover:shadow-2xl hover:border-2 hover:border-primary-voilet"
-            
+
           >
-            <ChevronLeft className="w-7 h-7" /> 
+            <ChevronLeft className="w-7 h-7" />
           </button>
         </div>
 
-        <div className="my-8 w-full lg:w-3/4 bg-[#1c1f3b] p-6 rounded-lg shadow-2xl border border-white/20">
-          <p className="text-white/80 text-center leading-relaxed flex flex-wrap justify-center gap-x-1 whitespace-pre-wrap min-h-[80px]">
+        <div className="mt-8 mb-6 md:mb-4 w-full md:w-1/2 sm:my-8">
+          <p className="mt-8 text-white/80 text-center leading-relaxed flex flex-wrap justify-center gap-x-1 whitespace-pre-wrap min-h-[80px]">
             {services_types[currentIndex].description.split(" ").map((word, index) => (
               <span
                 key={index}
-                className={`transition-colors duration-300 ${
-                  index <= highlightIndex
+                className={`transition-colors duration-300 ${index <= highlightIndex
                     ? "text-white font-semibold"
                     : "text-white/20"
-                }`}
+                  }`}
               >
                 {word}
               </span>
@@ -157,7 +156,7 @@ const Services = () => {
           <Button
             variant="glow"
             onClick={() => navigate("services")}
-            className="px-2 py-2 sm:px-6 sm:py-3 text-sm sm:text-base"
+            className="px-2 py-1 sm:px-6 sm:py-3 text-sm sm:text-base"
           >
             View More Services
           </Button>
