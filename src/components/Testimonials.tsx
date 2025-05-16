@@ -3,7 +3,9 @@ import { motion } from "framer-motion";
 import { testimonials } from "@/config/services";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-const CARD_WIDTH = typeof window !== "undefined" && window.innerWidth < 768 ? 250 : 600;
+const CARD_WIDTH = typeof window !== "undefined" && window.innerWidth < 768 ? 288 : 512;
+// 18rem = 288px, 32rem = 512px
+
 
 
 const Testimonials = () => {
@@ -75,11 +77,11 @@ const Testimonials = () => {
             key={index}
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
-            className="w-[23rem] md:w-[26rem] flex-shrink-0 p-[2px] rounded-2xl my-10 transition-all duration-300 hover:scale-105 bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500"
+            className="w-[18rem] md:w-[33rem] flex-shrink-0 p-[2px] rounded-2xl my-4 transition-all duration-300 hover:scale-105 bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500"
 
             whileHover={{ scale: 1.05 }}
           >
-            <div className="bg-[#13142e] p-6 rounded-[1rem] h-full">
+            <div className="bg-[#13142e] p-4 rounded-[1rem] h-full">
               <img
                 src={testimonial.image}
                 alt={testimonial.name}
