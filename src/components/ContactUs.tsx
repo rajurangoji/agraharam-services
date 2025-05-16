@@ -31,13 +31,17 @@ const ContactUs = () => {
   return (
     <section
       id="contact"
-      className="min-h-screen bg-[#0D0C1D] text-[#B4A5D0] py-12"
+      className="min-h-screen bg-[#0D0C1D] text-[#B4A5D0] py-10 px-4 sm:px-6"
     >
-      <div className="max-w-screen-xl mx-auto px-6 lg:px-16">
+      <div className="max-w-screen-xl mx-auto h-full flex flex-col justify-center">
+        <h2 className="text-3xl sm:text-3xl lg:text-5xl font-bold text-center mb-8 sm:mb-10 text-violet-400">
+  Contact Us
+</h2>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <div className="bg-gradient-to-r from-gray-800 to-gray-700 p-8 rounded-2xl shadow-lg">
-            <h3 className="text-2xl font-semibold mb-6 text-violet-300">
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="bg-gray-800/70 backdrop-blur-md p-6 sm:p-8 rounded-2xl shadow-xl border border-gray-700">
+            <h3 className="text-xl sm:text-2xl font-semibold mb-4 text-violet-300">
               Get in Touch
             </h3>
 
@@ -54,7 +58,7 @@ const ContactUs = () => {
                 />
               </div>
 
-              <div className="mb-4">
+              <div className="mb-3">
                 <label className="block text-sm font-medium text-gray-300">
                   Email
                 </label>
@@ -80,7 +84,7 @@ const ContactUs = () => {
 
               <button
                 type="submit"
-                className="w-full bg-violet-500 text-white px-6 py-3 rounded-md hover:bg-violet-600 transition-all shadow-md hover:shadow-lg"
+                className="w-full bg-violet-500 text-white px-6 py-2 rounded-md hover:bg-violet-600 transition-all shadow-md hover:shadow-lg"
               >
                 Submit
               </button>
@@ -94,3 +98,4 @@ const ContactUs = () => {
 };
 
 export default ContactUs;
+git push

@@ -40,7 +40,7 @@ const AboutUs = () => {
             <p className="text-lg text-neutral-200 leading-relaxed font-light text-justify">
               With a deep respect for tradition and a commitment to authenticity, Agraharam Services bridges the gap between ancient wisdom and modern needs. Whether you're seeking guidance through Vedic astrology or planning a culturally rooted event, our services are designed to offer spiritual clarity and meaningful experiences. From detailed astrological consultations to pure vegetarian Brahmin meals, we uphold the values of purity, precision, and devotion in everything we do.
             </p>
-            <Button className="mt-4 rounded-full text-black">Explore</Button>
+            <Button variant="glow" className="text-white/80 mt-4 rounded-full">Explore</Button>
           </div>
         </div>
       </div>

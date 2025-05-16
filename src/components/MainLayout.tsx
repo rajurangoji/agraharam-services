@@ -6,6 +6,7 @@ import Testimonials from "./Testimonials";
 import ContactUs from "./ContactUs";
 import Footer from "./Footer";
 import AboutUs from "./AboutUs";
+import WhatsAppButton from "./WhatsappButton";
 
 function MainLayout() {
     const [activeSection, setActiveSection] = useState("home");
@@ -50,7 +51,7 @@ function MainLayout() {
       <section id="contact">
         <ContactUs />
       </section>
-
+      <WhatsAppButton />
       <Footer />
     </div>
   );
