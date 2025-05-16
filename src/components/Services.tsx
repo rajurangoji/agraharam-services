@@ -11,7 +11,7 @@ const Services = () => {
   const sectionRef = useRef(null);
   const navigate = useNavigate();
 
-  // Detect if the section is in view
+  
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -31,7 +31,7 @@ const Services = () => {
     };
   }, []);
 
-  // Dynamically return positions based on scroll state
+  
   const getPosition = (index: number) => {
     if (!isInView) {
       return {
@@ -48,7 +48,7 @@ const Services = () => {
     return imagePositions[offset];
   };
 
-  // Karaoke effect for description
+  
   useEffect(() => {
     setHighlightIndex(-1);
     const words = services_types[currentIndex].description.split(" ");
@@ -82,11 +82,11 @@ const Services = () => {
       className="py-16 bg-[#13142e] text-primary-voilet w-full overflow-hidden"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-16 flex flex-col items-center">
-        <h2 className="text-4xl lg:text-5xl font-bold text-center mb-4 text-primary-voilet">
+        <h2 className="text-4xl font-bold text-center mb-4 text-primary-voilet">
           Our Services
         </h2>
 
-        <div className="flex items-center justify-center w-full mb-5">
+        <div className="flex items-center justify-center w-full  sm:mb-2">
           <h3 className="text-xl lg:text-3xl text-white font-bold">
             {services_types[currentIndex].title}
           </h3>
@@ -100,7 +100,7 @@ const Services = () => {
             return (
               <div
   key={index}
-  className={`absolute w-[300px] sm:w-[400px] md:w-[250px] lg:w-[350px] h-[270px] sm:h-[300px] md:h-[320px] lg:h-[400px] rounded-lg cursor-pointer transition-all duration-700 ease-in-out`}
+  className={`absolute w-[300px] sm:w-[400px] md:w-[250px] lg:w-[350px] h-[270px] sm:h-[300px] md:h-[320px] lg:h-[400px] rounded-lg cursor-pointer transition-all duration-1000 ease-in-out`}
   onClick={() => setCurrentIndex(index)}
   style={{
     transform: `translate(${x}, ${y}) rotate(${rotate}deg) scale(${scale})`,
@@ -136,7 +136,7 @@ const Services = () => {
           </button>
         </div>
 
-        <div className="my-8 w-full lg:w-3/4 bg-[#1c1f3b] p-6 rounded-lg shadow-2xl border border-white/20">
+        <div className="mt-8 mb-6 md:mb-4 w-full md:w-1/2 sm:my-8">
           <p className="text-white/80 text-center leading-relaxed flex flex-wrap justify-center gap-x-1 whitespace-pre-wrap min-h-[80px]">
             {services_types[currentIndex].description.split(" ").map((word, index) => (
               <span
@@ -157,7 +157,7 @@ const Services = () => {
           <Button
             variant="glow"
             onClick={() => navigate("services")}
-            className="px-2 py-2 sm:px-6 sm:py-3 text-sm sm:text-base"
+            className="px-2 py-1 sm:px-6 sm:py-3 text-sm sm:text-base"
           >
             View More Services
           </Button>

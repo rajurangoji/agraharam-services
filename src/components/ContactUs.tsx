@@ -2,37 +2,40 @@ const ContactUs = () => {
   return (
     <section
       id="contact"
-      className="min-h-screen bg-[#0D0C1D] text-[#B4A5D0] py-12"
+      className="min-h-screen bg-[#0D0C1D] text-[#B4A5D0] py-10 px-4 sm:px-6"
     >
-      <div className="max-w-screen-xl mx-auto px-6 lg:px-16">
-        <h2 className="text-4xl font-semibold text-center mb-12 text-violet-400 font-iora">
-          Contact Us
-        </h2>
+      <div className="max-w-screen-xl mx-auto h-full flex flex-col justify-center">
+        <h2 className="text-3xl sm:text-3xl lg:text-5xl font-bold text-center mb-8 sm:mb-10 text-violet-400">
+  Contact Us
+</h2>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <div className="bg-gradient-to-r from-gray-800 to-gray-700 p-8 rounded-2xl shadow-lg">
-            <h3 className="text-2xl font-semibold mb-6 text-violet-300">
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="bg-gray-800/70 backdrop-blur-md p-6 sm:p-8 rounded-2xl shadow-xl border border-gray-700">
+            <h3 className="text-xl sm:text-2xl font-semibold mb-4 text-violet-300">
               Get in Touch
             </h3>
             <form>
-              <div className="mb-4">
+              <div className="mb-3">
                 <label className="block text-sm font-medium text-gray-300">
                   Name
                 </label>
                 <input
                   type="text"
-                  className="w-full mt-2 px-4 py-3 border border-gray-600 rounded-md bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-violet-500"
+                  placeholder="Your name"
+                  className="w-full mt-1 px-4 py-2 border border-gray-600 rounded-md bg-gray-900 text-white focus:outline-none focus:ring-2 focus:ring-violet-500"
                   required
                 />
               </div>
 
-              <div className="mb-4">
+              <div className="mb-3">
                 <label className="block text-sm font-medium text-gray-300">
                   Email
                 </label>
                 <input
                   type="email"
-                  className="w-full mt-2 px-4 py-3 border border-gray-600 rounded-md bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-violet-500"
+                  placeholder="you@example.com"
+                  className="w-full mt-1 px-4 py-2 border border-gray-600 rounded-md bg-gray-900 text-white focus:outline-none focus:ring-2 focus:ring-violet-500"
                   required
                 />
               </div>
@@ -42,44 +45,60 @@ const ContactUs = () => {
                   Message
                 </label>
                 <textarea
-                  rows={4}
-                  className="w-full mt-2 px-4 py-3 border border-gray-600 rounded-md bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-violet-500"
+                  rows={3}
+                  placeholder="Your message..."
+                  className="w-full mt-1 px-4 py-2 border border-gray-600 rounded-md bg-gray-900 text-white focus:outline-none focus:ring-2 focus:ring-violet-500"
                   required
                 ></textarea>
               </div>
 
               <button
                 type="submit"
-                className="w-full bg-violet-500 text-white px-6 py-3 rounded-md hover:bg-violet-600 transition-all shadow-md hover:shadow-lg"
+                className="w-full bg-violet-500 text-white px-6 py-2 rounded-md hover:bg-violet-600 transition-all shadow-md hover:shadow-lg"
               >
                 Submit
               </button>
             </form>
           </div>
-          <div className="bg-gradient-to-r from-gray-800 to-gray-700 p-8 rounded-2xl shadow-lg">
-            <h3 className="text-2xl font-semibold mb-6 text-violet-300">
-              Our Contact Information
-            </h3>
-            <p className="text-lg mb-4">
-              <strong className="text-violet-400">Address:</strong> 123 Agraharam Street, Cityville, Country
-            </p>
-            <p className="text-lg mb-4">
-              <strong className="text-violet-400">Phone:</strong> +1 (234) 567-890
-            </p>
-            <p className="text-lg mb-4">
-              <strong className="text-violet-400">Email:</strong> info@agraharam.com
-            </p>
-            <div className="flex space-x-6 mt-6">
-              {/* Social Media Links */}
-              {["facebook-f", "twitter", "instagram"].map((icon, index) => (
-                <a
-                  key={index}
-                  href="#"
-                  className="text-violet-400 hover:text-violet-500 text-2xl transition-all"
-                >
-                  <i className={`fab fa-${icon}`}></i>
-                </a>
-              ))}
+
+          <div className="bg-gray-800/70 backdrop-blur-md p-6 sm:p-8 rounded-2xl shadow-xl border border-gray-700 flex flex-col justify-between">
+            <div>
+              <h3 className="text-xl sm:text-2xl font-semibold mb-4 text-violet-300">
+                Our Contact Information
+              </h3>
+              <p className="text-base mb-3">
+                <strong className="text-violet-400">Address:</strong> 123 Agraharam Street, Cityville, Country
+              </p>
+              <p className="text-base mb-3">
+                <strong className="text-violet-400">Phone:</strong> +1 (234) 567-890
+              </p>
+              <p className="text-base mb-3">
+                <strong className="text-violet-400">Email:</strong> info@agraharam.com
+              </p>
+              <div className="flex space-x-5 mt-4 mb-6">
+                {["facebook-f", "twitter", "instagram"].map((icon, index) => (
+                  <a
+                    key={index}
+                    href="#"
+                    className="text-violet-400 hover:text-violet-500 text-xl transition-all"
+                  >
+                    <i className={`fab fa-${icon}`}></i>
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-4 rounded-lg overflow-hidden shadow-md border border-gray-700 w-full">
+              <iframe
+                title="Location Map"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.4117022730927!2d78.47441831486994!3d17.38504408815198!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb913bd72fddaf%3A0x7f5a8963b61ebac2!2sHyderabad%2C%20Telangana%2C%20India!5e0!3m2!1sen!2sus!4v1683066184497!5m2!1sen!2sus"
+                width="100%"
+                height="200"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
             </div>
           </div>
         </div>

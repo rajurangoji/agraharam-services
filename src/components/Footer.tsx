@@ -47,20 +47,20 @@ const Footer = () => {
           <p className="text-sm text-gray-400 mb-4">
             Sign up for our newsletter to receive updates, offers, and news.
           </p>
-          <div className="flex justify-center space-x-2">
+          <div className="flex flex-col sm:flex-row justify-center items-center space-y-2 sm:space-y-0 sm:space-x-2">
             <input
               type="email"
               placeholder="Enter your email"
               className="px-4 py-2 rounded-md bg-gray-800 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-violet-500"
             />
-            <button className="bg-violet-500 px-6 py-2 rounded-md hover:bg-violet-600 transition duration-300 shadow-md">
+            <button className="bg-violet-500 px-6 py-2 rounded-md hover:bg-violet-600 transition duration-300 shadow-md text-white">
               Subscribe
             </button>
           </div>
         </div>
         <div className="text-center mt-8">
           <p className="text-sm text-gray-400">
-            © 2025 <span className="text-violet-400">Agraharam</span>. All
+            © 2025 <span className="text-violet-400">Agraharam Services</span>. All
             rights reserved.
           </p>
         </div>
