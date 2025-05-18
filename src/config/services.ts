@@ -210,6 +210,52 @@ export const testimonials = [
     fullTestimonial:
       "The remedies and suggestions given by the astrologer were practical and effective. It has positively impacted my life. Thank you for your guidance!",
   },
+  {
+  name: "Emily Davis",
+  image:
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnK_tOlfiqDOcSjABOkABNdU67X7IFuRBan9J5Mq4LahZAtuy0XSK87oZCR3V9F33IssM&usqp=CAU",
+  shortTestimonial:
+    "Truly enlightening. The consultation gave me clarity on many aspects of my life.",
+  fullTestimonial:
+    "I was going through a confusing phase when I came across this service. The astrologer patiently listened and provided detailed insights that made a real difference. The clarity I gained was priceless.",
+},
+{
+  name: "Rahul Mehta",
+  image:
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnK_tOlfiqDOcSjABOkABNdU67X7IFuRBan9J5Mq4LahZAtuy0XSK87oZCR3V9F33IssM&usqp=CAU",
+  shortTestimonial:
+    "The predictions were precise, and the advice was easy to implement.",
+  fullTestimonial:
+    "I’ve consulted many astrologers before, but this was different. The accuracy of the predictions and the simplicity of the remedies really impressed me. I could feel the changes almost instantly.",
+},
+{
+  name: "Sophia Williams",
+  image:
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnK_tOlfiqDOcSjABOkABNdU67X7IFuRBan9J5Mq4LahZAtuy0XSK87oZCR3V9F33IssM&usqp=CAU",
+  shortTestimonial:
+    "Wonderful experience. The astrologer was kind and very knowledgeable.",
+  fullTestimonial:
+    "From the first consultation itself, I felt comfortable. The astrologer took the time to explain my birth chart and future predictions in detail. I appreciate the empathy and expertise.",
+},
+{
+  name: "Amit Kumar",
+  image:
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnK_tOlfiqDOcSjABOkABNdU67X7IFuRBan9J5Mq4LahZAtuy0XSK87oZCR3V9F33IssM&usqp=CAU",
+  shortTestimonial:
+    "Helped me make an important decision with confidence.",
+  fullTestimonial:
+    "I was facing a tough decision regarding my job. The personalized reading gave me the confidence to choose the right path. The remedies also helped reduce the stress I was feeling.",
+},
+{
+  name: "Nisha Patel",
+  image:
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnK_tOlfiqDOcSjABOkABNdU67X7IFuRBan9J5Mq4LahZAtuy0XSK87oZCR3V9F33IssM&usqp=CAU",
+  shortTestimonial:
+    "Accurate predictions and heartfelt advice.",
+  fullTestimonial:
+    "The astrologer not only gave accurate predictions but also shared heartfelt advice that resonated with me. I felt understood and guided throughout the process. Thank you so much!",
+}
+
 ];
 
 export const socialMediaLinks = [

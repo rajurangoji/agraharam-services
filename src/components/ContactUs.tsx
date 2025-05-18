@@ -1,4 +1,33 @@
+import emailjs from "emailjs-com";
+import { useRef } from "react";
+
 const ContactUs = () => {
+  const form = useRef<HTMLFormElement>(null);
+
+  const sendEmail = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!form.current) return;
+
+    emailjs
+      .sendForm(
+        "service_ula87lq",     // Replace with your EmailJS service ID
+        "template_2wmkwwu",    // Replace with your EmailJS template ID
+        form.current,
+        "oqw7aP2dyDq6jxo-f"         // Replace with your EmailJS public key (user ID)
+      )
+      .then(
+        () => {
+          alert("Message sent successfully!");
+          form.current?.reset();
+        },
+        (error) => {
+          alert("Failed to send message. Please try again.");
+          console.error(error);
+        }
+      );
+  };
+
   return (
     <section
       id="contact"
@@ -15,16 +44,16 @@ const ContactUs = () => {
             <h3 className="text-xl sm:text-2xl font-semibold mb-4 text-violet-300">
               Get in Touch
             </h3>
-            <form>
-              <div className="mb-3">
+            <form ref={form} onSubmit={sendEmail}>
+              <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-300">
                   Name
                 </label>
                 <input
                   type="text"
-                  placeholder="Your name"
-                  className="w-full mt-1 px-4 py-2 border border-gray-600 rounded-md bg-gray-900 text-white focus:outline-none focus:ring-2 focus:ring-violet-500"
+                  name="from_name"
                   required
+                  className="w-full mt-2 px-4 py-3 border border-gray-600 rounded-md bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-violet-500"
                 />
               </div>
 
@@ -34,6 +63,7 @@ const ContactUs = () => {
                 </label>
                 <input
                   type="email"
+                  name="from_email"
                   placeholder="you@example.com"
                   className="w-full mt-1 px-4 py-2 border border-gray-600 rounded-md bg-gray-900 text-white focus:outline-none focus:ring-2 focus:ring-violet-500"
                   required
@@ -45,10 +75,10 @@ const ContactUs = () => {
                   Message
                 </label>
                 <textarea
-                  rows={3}
-                  placeholder="Your message..."
-                  className="w-full mt-1 px-4 py-2 border border-gray-600 rounded-md bg-gray-900 text-white focus:outline-none focus:ring-2 focus:ring-violet-500"
+                  rows={4}
+                  name="message"
                   required
+                  className="w-full mt-1 px-4 py-2 border border-gray-600 rounded-md bg-gray-900 text-white focus:outline-none focus:ring-2 focus:ring-violet-500"
                 ></textarea>
               </div>
 
@@ -60,7 +90,6 @@ const ContactUs = () => {
               </button>
             </form>
           </div>
-
           <div className="bg-gray-800/70 backdrop-blur-md p-6 sm:p-8 rounded-2xl shadow-xl border border-gray-700 flex flex-col justify-between">
             <div>
               <h3 className="text-xl sm:text-2xl font-semibold mb-4 text-violet-300">
