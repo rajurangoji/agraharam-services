@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { db } from "../firebase";
-import { addDoc, collection, getDocs } from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
@@ -82,7 +82,10 @@ const AddPujaForm: React.FC = () => {
 
   return (
     <div className="max-w-3xl mx-auto p-6 bg-white shadow-md rounded-md">
-      <h2 className="text-2xl font-semibold mb-4">Add Puja / Parihara</h2>
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-2xl font-semibold mb-4">Add Puja / Parihara</h2>
+        <Button onClick={() => navigate("/listofpujas")}>Go to List</Button>
+      </div>
 
       <div className="space-y-4">
         <div>
@@ -118,38 +121,43 @@ const AddPujaForm: React.FC = () => {
             onChange={(e) => setForm({ ...form, description: e.target.value })}
           />
         </div>
-
-        {(
-          [
-            "benefits",
-            "process",
-            "postPujaGuidelines",
-            "whyAgraharam",
-          ] as ArrayField[]
-        ).map((field: ArrayField) => (
-          <div key={field}>
-            <label className="capitalize">{field}</label>
-            {form[field].map((item: string, index: number) => (
-              <div key={index} className="flex gap-2 my-2">
-                <Input
-                  value={item}
-                  onChange={(e) =>
-                    handleInputChange(field, index, e.target.value)
-                  }
-                  placeholder={`${field} ${index + 1}`}
-                />
-                {index === form[field].length - 1 && (
-                  <Button type="button" onClick={() => handleAddField(field)}>
-                    Add New
-                  </Button>
-                )}
-              </div>
-            ))}
-          </div>
-        ))}
-        <div className="flex justify-end">
-          <Button onClick={handleSubmit}>Submit</Button>
+        <div>
+          {(
+            [
+              "benefits",
+              "process",
+              "postPujaGuidelines",
+              "whyAgraharam",
+            ] as ArrayField[]
+          ).map((field: ArrayField) => (
+            <div key={field} className="w-full mb-4">
+              <label className="capitalize block mb-1">{field}</label>
+              {form[field].map((item: string, index: number) => (
+                <div key={index} className="gap-2 w-full">
+                  <Input
+                    value={item}
+                    onChange={(e) =>
+                      handleInputChange(field, index, e.target.value)
+                    } 
+                    className="flex-grow"
+                  />
+                  {/* {index === form[field].length - 1 && (
+                    <Button
+                      type="button"
+                      onClick={() => handleAddField(field)}
+                      className="w-32"
+                    >
+                      Add New
+                    </Button>
+                  )} */}
+                </div>
+              ))}
+            </div>
+          ))}
         </div>
+      </div>
+      <div className="flex justify-end">
+        <Button onClick={handleSubmit}>Submit</Button>
       </div>
     </div>
   );
