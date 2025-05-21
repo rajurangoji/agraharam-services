@@ -12,80 +12,85 @@ import {
   SelectValue,
 } from "./ui/select";
 import { useNavigate } from "react-router";
-import { ListPlus, Type, FileText, Users, ListChecks } from "lucide-react";
 
-interface Pandith {
-  id: string;
-  pandith_name: string;
-  experience: string;
-  spoken: string[];
-  expertise: string;
-  pandith_description: string;
-  photo: string;
-}
-
-interface PujaForm {
+interface PujaFormData {
   title: string;
   description: string;
   type: "Puja" | "Parihara";
-  pandithIds: string[];
+  benefits: string[];
+  process: string[];
+  postPujaGuidelines: string[];
+  whyAgraharam: string[];
 }
 
-const AddPujaOrParihara: React.FC = () => {
+type ArrayField =
+  | "benefits"
+  | "process"
+  | "postPujaGuidelines"
+  | "whyAgraharam";
+
+const AddPujaForm: React.FC = () => {
   const navigate = useNavigate();
-  const [form, setForm] = useState<PujaForm>({
+  const [form, setForm] = useState<PujaFormData>({
     title: "",
     description: "",
     type: "Puja",
-    pandithIds: [],
+    benefits: [""],
+    process: [""],
+    postPujaGuidelines: [""],
+    whyAgraharam: [""],
   });
-  const [pandiths, setPandiths] = useState<Pandith[]>([]);
-
-  useEffect(() => {
-    const fetchPandiths = async () => {
-      const snapshot = await getDocs(collection(db, "pandiths"));
-      const data: Pandith[] = snapshot.docs.map((doc) => ({
-        ...(doc.data() as Pandith),
-      }));
-      setPandiths(data);
-    };
-
-    fetchPandiths();
-  }, []);
 
   const handleSubmit = async () => {
     try {
       const collectionName = form.type === "Puja" ? "pujas" : "pariharas";
       await addDoc(collection(db, collectionName), {
-        title: form.title,
-        description: form.description,
-        pandiths: form.pandithIds,
+        ...form,
+        benefits: form.benefits.filter(Boolean),
+        process: form.process.filter(Boolean),
+        postPujaGuidelines: form.postPujaGuidelines.filter(Boolean),
+        whyAgraharam: form.whyAgraharam.filter(Boolean),
       });
       alert(`${form.type} added successfully!`);
-      setForm({ title: "", description: "", type: "Puja", pandithIds: [] });
+      setForm({
+        title: "",
+        description: "",
+        type: "Puja",
+        benefits: [""],
+        process: [""],
+        postPujaGuidelines: [""],
+        whyAgraharam: [""],
+      });
     } catch (error) {
-      console.error("Error adding:", error);
+      console.error("Error adding puja/parihara:", error);
     }
   };
 
-  const handleViewList = () => {
-    navigate("/listofpujas");
+  const handleInputChange = (
+    field: keyof PujaFormData,
+    index: number,
+    value: string
+  ) => {
+    const updated = [...form[field]];
+    updated[index] = value;
+    setForm({ ...form, [field]: updated });
+  };
+
+  const handleAddField = (field: keyof PujaFormData) => {
+    setForm({ ...form, [field]: [...form[field], ""] });
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-white shadow-md rounded-md">
+    <div className="max-w-3xl mx-auto p-6 bg-white shadow-md rounded-md">
       <h2 className="text-2xl font-semibold mb-4">Add Puja / Parihara</h2>
 
       <div className="space-y-4">
-        <div className="space-y-2">
-          <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-            <Type className="inline-block w-4 h-4 mr-2" />
-            Type
-          </label>
+        <div>
+          <label>Type</label>
           <Select
             value={form.type}
-            onValueChange={(value) =>
-              setForm({ ...form, type: value as "Puja" | "Parihara" })
+            onValueChange={(val) =>
+              setForm({ ...form, type: val as "Puja" | "Parihara" })
             }
           >
             <SelectTrigger>
@@ -98,67 +103,56 @@ const AddPujaOrParihara: React.FC = () => {
           </Select>
         </div>
 
-        <div className="space-y-2">
-          <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-            <FileText className="inline-block w-4 h-4 mr-2" />
-            Title
-          </label>
+        <div>
+          <label>Title</label>
           <Input
             value={form.title}
             onChange={(e) => setForm({ ...form, title: e.target.value })}
-            placeholder="Enter title"
           />
         </div>
 
-        <div className="space-y-2">
-          <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-            <ListPlus className="inline-block w-4 h-4 mr-2" />
-            Description
-          </label>
+        <div>
+          <label>Description</label>
           <Textarea
             value={form.description}
             onChange={(e) => setForm({ ...form, description: e.target.value })}
-            placeholder="Enter description"
-            className="min-h-[100px]"
           />
         </div>
 
-        <div className="space-y-2">
-          <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-            <Users className="inline-block w-4 h-4 mr-2" />
-            Assign Pandiths
-          </label>
-          <Select
-            value={form.pandithIds.join(",")}
-            onValueChange={(value) =>
-              setForm({ ...form, pandithIds: value.split(",").filter(Boolean) })
-            }
-          >
-            <SelectTrigger>
-              <SelectValue placeholder="Select pandiths" />
-            </SelectTrigger>
-            <SelectContent>
-              {pandiths.map((pandith) => (
-                <SelectItem key={pandith.id} value={pandith.id}>
-                  {pandith.pandith_name}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-
-        <div className="flex gap-4">
-          <Button onClick={handleSubmit} className="flex-1">
-            <ListChecks className="w-4 h-4 mr-2" />
-            Add {form.type}
-          </Button>
-          <Button variant="outline" onClick={handleViewList}>
-            View List
-          </Button>
+        {(
+          [
+            "benefits",
+            "process",
+            "postPujaGuidelines",
+            "whyAgraharam",
+          ] as ArrayField[]
+        ).map((field: ArrayField) => (
+          <div key={field}>
+            <label className="capitalize">{field}</label>
+            {form[field].map((item: string, index: number) => (
+              <div key={index} className="flex gap-2 my-2">
+                <Input
+                  value={item}
+                  onChange={(e) =>
+                    handleInputChange(field, index, e.target.value)
+                  }
+                  placeholder={`${field} ${index + 1}`}
+                />
+                {index === form[field].length - 1 && (
+                  <Button type="button" onClick={() => handleAddField(field)}>
+                    Add New
+                  </Button>
+                )}
+              </div>
+            ))}
+          </div>
+        ))}
+        <div className="flex justify-end">
+          <Button onClick={handleSubmit}>Submit</Button>
         </div>
       </div>
     </div>
   );
 };
 
-export default AddPujaOrParihara;
+export default AddPujaForm;
