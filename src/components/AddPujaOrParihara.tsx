@@ -76,9 +76,9 @@ const AddPujaForm: React.FC = () => {
     setForm({ ...form, [field]: updated });
   };
 
-  const handleAddField = (field: keyof PujaFormData) => {
-    setForm({ ...form, [field]: [...form[field], ""] });
-  };
+  // const handleAddField = (field: keyof PujaFormData) => {
+  //   setForm({ ...form, [field]: [...form[field], ""] });
+  // };
 
   return (
     <div className="max-w-3xl mx-auto p-6 bg-white shadow-md rounded-md">
