@@ -39,7 +39,7 @@ function Pandiths() {
   useEffect(() => {
     const scroll = () => {
       if (!isPaused && scrollRef.current) {
-        scrollRef.current.scrollLeft += 1;
+        scrollRef.current.scrollLeft -= 1;
       }
     };
     scrollInterval.current = setInterval(scroll, 20);
@@ -54,7 +54,7 @@ function Pandiths() {
       if (!ref) return;
       const { scrollLeft, scrollWidth, clientWidth } = ref;
       if (scrollLeft + clientWidth >= scrollWidth) {
-        ref.scrollLeft = 0;
+        ref.scrollLeft = ref.scrollWidth/2;
       }
     };
     ref?.addEventListener("scroll", handleScroll);
