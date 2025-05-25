@@ -8,6 +8,7 @@ import Users from "./components/Users";
 import AddPujaOrParihara from "./components/AddPujaOrParihara";
 import AddPandith from "./components/AddPandith";
 import PujaPariharaList from "./components/PujaPariharaList";
+import ConfirmationForm from "./components/Services/ConfirmationForm";
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
       <Route path="services" element={<ServicesPage />}></Route>
       <Route path="services/:id" element={<SelectedService />} />
       <Route path="/services/:id/book/:pujaType" element={<BookingPage />} />
+      <Route path="services/:id/confirm" element={<ConfirmationForm />} />
       <Route path="ui-components" element={<ComponentsPage />}></Route>
       <Route path="users" element={<Users />}></Route>
       <Route path="addpuja" element={<AddPujaOrParihara />}></Route>
