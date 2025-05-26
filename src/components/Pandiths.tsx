@@ -21,47 +21,43 @@ function Pandiths() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const scrollInterval = useRef<NodeJS.Timeout | null>(null);
 
+  // Fetch Firestore data
   useEffect(() => {
-    const fetchPandiths = async () => {
+    const fetchData = async () => {
       const snapshot = await getDocs(collection(db, "pandiths"));
-      const pandithList: Pandith[] = snapshot.docs.map((doc) => ({
+      const data = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...(doc.data() as Omit<Pandith, "id">),
       }));
-      setPandiths(pandithList);
+      setPandiths(data);
     };
-    fetchPandiths();
+    fetchData();
   }, []);
 
+  // Duplicate list to create loop effect
   const loopedPandiths = [...pandiths, ...pandiths];
 
-  // Auto-scroll right to left
+  // Auto-scroll from LEFT → RIGHT
   useEffect(() => {
     const scroll = () => {
       if (!isPaused && scrollRef.current) {
         scrollRef.current.scrollLeft -= 1;
+
+        // Reset to start when reaching end of original + duplicate list
+       if (scrollRef.current.scrollLeft <= 0) {
+  scrollRef.current.scrollLeft = scrollRef.current.scrollWidth / 2;
+}
       }
     };
+
     scrollInterval.current = setInterval(scroll, 20);
+
     return () => {
       if (scrollInterval.current) clearInterval(scrollInterval.current);
     };
-  }, [isPaused]);
+  }, [isPaused, loopedPandiths]);
 
-  useEffect(() => {
-    const ref = scrollRef.current;
-    const handleScroll = () => {
-      if (!ref) return;
-      const { scrollLeft, scrollWidth, clientWidth } = ref;
-      if (scrollLeft + clientWidth >= scrollWidth) {
-        ref.scrollLeft = ref.scrollWidth/2;
-      }
-    };
-    ref?.addEventListener("scroll", handleScroll);
-    return () => ref?.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const pauseAndScroll = (amount: number) => {
+  const handleScroll = (amount: number) => {
     setIsPaused(true);
     scrollRef.current?.scrollBy({ left: amount, behavior: "smooth" });
     setTimeout(() => setIsPaused(false), 1000);
@@ -73,20 +69,21 @@ function Pandiths() {
         Available Pandiths
       </h2>
 
-      {/* Arrow Buttons in standard positions */}
+      {/* Scroll Arrows */}
       <button
         className="absolute top-1/2 left-4 transform -translate-y-1/2 z-10 bg-primary-voilet text-white p-4 rounded-full hover:scale-110 transition"
-        onClick={() => pauseAndScroll(-CARD_WIDTH)}
+        onClick={() => handleScroll(-CARD_WIDTH)}
       >
         <ChevronLeft />
       </button>
       <button
         className="absolute top-1/2 right-4 transform -translate-y-1/2 z-10 bg-primary-voilet text-white p-4 rounded-full hover:scale-110 transition"
-        onClick={() => pauseAndScroll(CARD_WIDTH)}
+        onClick={() => handleScroll(CARD_WIDTH)}
       >
         <ChevronRight />
       </button>
 
+      {/* Scrollable Cards Container */}
       <div
         ref={scrollRef}
         className="flex overflow-x-auto no-scrollbar space-x-6 px-4 md:px-10"
