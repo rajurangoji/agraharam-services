@@ -24,7 +24,6 @@ function App() {
       <Route path="addpuja" element={<AddPujaOrParihara />}></Route>
       <Route path="addPandith" element={<AddPandith />}></Route>
       <Route path="listofpujas" element={<PujaPariharaList />}></Route>
-
     </Routes>
   );
 }
