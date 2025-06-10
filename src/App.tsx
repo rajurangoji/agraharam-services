@@ -13,6 +13,7 @@ import AddPujaOrParihara from "./components/AddPujaOrParihara";
 import AddPandith from "./components/AddPandith";
 import PujaPariharaList from "./components/PujaPariharaList";
 import SelectedPujaOrParihara from "./components/Services/SelectedPujaOrParihara";
+import ConfirmationForm from "./components/Services/ConfirmationForm";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
       <Route path="services/catering/:id" element={<CateringService />} />
       <Route path="services/horoscope/:id" element={<HoroscopeService />} />
       <Route path="services/education/:id" element={<EducationService />} />
+      <Route path="services/:id/confirm" element={<ConfirmationForm />} />
       <Route path="ui-components" element={<ComponentsPage />}></Route>
       <Route path="users" element={<Users />}></Route>
       <Route path="addpuja" element={<AddPujaOrParihara />}></Route>
