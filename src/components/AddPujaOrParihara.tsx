@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { db } from "../firebase";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, getDocs } from "firebase/firestore";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
@@ -12,6 +12,7 @@ import {
   SelectValue,
 } from "./ui/select";
 import { useNavigate } from "react-router";
+import { Users } from "lucide-react";
 
 interface PujaFormData {
   title: string;
@@ -21,6 +22,17 @@ interface PujaFormData {
   process: string[];
   postPujaGuidelines: string[];
   whyAgraharam: string[];
+  pandithIds: string[];
+}
+
+interface Pandith {
+  id: string;
+  pandith_name: string;
+  experience: string;
+  spoken: string[];
+  expertise: string;
+  pandith_description: string;
+  photo: string;
 }
 
 type ArrayField =
@@ -39,7 +51,29 @@ const AddPujaForm: React.FC = () => {
     process: [""],
     postPujaGuidelines: [""],
     whyAgraharam: [""],
+    pandithIds: [],
   });
+
+  const [pandiths, setPandiths] = useState<Pandith[]>([]);
+  const formData = [
+    "benefits",
+    "process",
+    "postPujaGuidelines",
+    "whyAgraharam",
+  ];
+
+  useEffect(() => {
+    const fetchPandiths = async () => {
+      const snapshot = await getDocs(collection(db, "pandiths"));
+      const data: Pandith[] = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...(doc.data() as Omit<Pandith, "id">),
+      }));
+      setPandiths(data);
+    };
+
+    fetchPandiths();
+  }, []);
 
   const handleSubmit = async () => {
     try {
@@ -60,6 +94,7 @@ const AddPujaForm: React.FC = () => {
         process: [""],
         postPujaGuidelines: [""],
         whyAgraharam: [""],
+        pandithIds: [],
       });
     } catch (error) {
       console.error("Error adding puja/parihara:", error);
@@ -71,14 +106,10 @@ const AddPujaForm: React.FC = () => {
     index: number,
     value: string
   ) => {
-    const updated = [...form[field]];
+    const updated = [...(form[field] as string[])];
     updated[index] = value;
     setForm({ ...form, [field]: updated });
   };
-
-  // const handleAddField = (field: keyof PujaFormData) => {
-  //   setForm({ ...form, [field]: [...form[field], ""] });
-  // };
 
   return (
     <div className="max-w-3xl mx-auto p-6 bg-white shadow-md rounded-md">
@@ -121,41 +152,52 @@ const AddPujaForm: React.FC = () => {
             onChange={(e) => setForm({ ...form, description: e.target.value })}
           />
         </div>
-        <div>
-          {(
-            [
-              "benefits",
-              "process",
-              "postPujaGuidelines",
-              "whyAgraharam",
-            ] as ArrayField[]
-          ).map((field: ArrayField) => (
-            <div key={field} className="w-full mb-4">
-              <label className="capitalize block mb-1">{field}</label>
-              {form[field].map((item: string, index: number) => (
-                <div key={index} className="gap-2 w-full">
-                  <Input
-                    value={item}
-                    onChange={(e) =>
-                      handleInputChange(field, index, e.target.value)
-                    } 
-                    className="flex-grow"
-                  />
-                  {/* {index === form[field].length - 1 && (
-                    <Button
-                      type="button"
-                      onClick={() => handleAddField(field)}
-                      className="w-32"
-                    >
-                      Add New
-                    </Button>
-                  )} */}
-                </div>
+
+        <div className="space-y-2">
+          <label className="text-sm font-medium leading-none">
+            <Users className="inline-block w-4 h-4 mr-2" />
+            Assign Pandiths
+          </label>
+          <Select
+            value={form.pandithIds.join(",")}
+            onValueChange={(value) =>
+              setForm({
+                ...form,
+                pandithIds: value.split(",").filter(Boolean),
+              })
+            }
+          >
+            <SelectTrigger>
+              <SelectValue placeholder="Select pandiths" />
+            </SelectTrigger>
+            <SelectContent>
+              {pandiths.map((pandith) => (
+                <SelectItem key={pandith.id} value={pandith.id}>
+                  {pandith.pandith_name}
+                </SelectItem>
               ))}
-            </div>
-          ))}
+            </SelectContent>
+          </Select>
         </div>
+
+        {(formData as ArrayField[]).map((field) => (
+          <div key={field} className="w-full mb-4">
+            <label className="capitalize block mb-1">{field}</label>
+            {form[field].map((item, index) => (
+              <div key={index} className="gap-2 w-full">
+                <Input
+                  value={item}
+                  onChange={(e) =>
+                    handleInputChange(field, index, e.target.value)
+                  }
+                  className="flex-grow"
+                />
+              </div>
+            ))}
+          </div>
+        ))}
       </div>
+
       <div className="flex justify-end">
         <Button onClick={handleSubmit}>Submit</Button>
       </div>
