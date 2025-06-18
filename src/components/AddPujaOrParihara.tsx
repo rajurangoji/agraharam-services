@@ -23,6 +23,7 @@ interface PujaFormData {
   postPujaGuidelines: string[];
   whyAgraharam: string[];
   pandithIds: string[];
+  isPandithDropdownOpen: boolean;
 }
 
 interface Pandith {
@@ -52,6 +53,7 @@ const AddPujaForm: React.FC = () => {
     postPujaGuidelines: [""],
     whyAgraharam: [""],
     pandithIds: [],
+    isPandithDropdownOpen: false,
   });
 
   const [pandiths, setPandiths] = useState<Pandith[]>([]);
@@ -75,6 +77,24 @@ const AddPujaForm: React.FC = () => {
     fetchPandiths();
   }, []);
 
+  // Handle clicking outside dropdown to close it
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Element;
+      if (!target.closest('.pandith-dropdown')) {
+        setForm(prev => ({ ...prev, isPandithDropdownOpen: false }));
+      }
+    };
+
+    if (form.isPandithDropdownOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [form.isPandithDropdownOpen]);
+
   const handleSubmit = async () => {
     try {
       const collectionName = form.type === "Puja" ? "pujas" : "pariharas";
@@ -95,6 +115,7 @@ const AddPujaForm: React.FC = () => {
         postPujaGuidelines: [""],
         whyAgraharam: [""],
         pandithIds: [],
+        isPandithDropdownOpen: false,
       });
     } catch (error) {
       console.error("Error adding puja/parihara:", error);
@@ -158,26 +179,96 @@ const AddPujaForm: React.FC = () => {
             <Users className="inline-block w-4 h-4 mr-2" />
             Assign Pandiths
           </label>
-          <Select
-            value={form.pandithIds.join(",")}
-            onValueChange={(value) =>
-              setForm({
-                ...form,
-                pandithIds: value.split(",").filter(Boolean),
-              })
-            }
-          >
-            <SelectTrigger>
-              <SelectValue placeholder="Select pandiths" />
-            </SelectTrigger>
-            <SelectContent>
-              {pandiths.map((pandith) => (
-                <SelectItem key={pandith.id} value={pandith.id}>
-                  {pandith.pandith_name}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+          <div className="space-y-2">
+            <div className="relative pandith-dropdown">
+              <button
+                type="button"
+                onClick={() => setForm({ ...form, isPandithDropdownOpen: !form.isPandithDropdownOpen })}
+                className="w-full flex items-center justify-between p-3 border border-gray-300 rounded-md bg-white hover:bg-gray-50"
+              >
+                <span className="text-gray-500">
+                  {form.pandithIds.length > 0 
+                    ? `${form.pandithIds.length} pandith(s) selected`
+                    : "Select pandiths"
+                  }
+                </span>
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              
+              {form.isPandithDropdownOpen && (
+                <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-y-auto">
+                  {pandiths.map((pandith) => (
+                    <label
+                      key={pandith.id}
+                      className="flex items-center gap-3 p-3 hover:bg-gray-50 cursor-pointer"
+                    >
+                      <input
+                        type="checkbox"
+                        checked={form.pandithIds.includes(pandith.id)}
+                        onChange={(e) => {
+                          if (e.target.checked) {
+                            setForm({
+                              ...form,
+                              pandithIds: [...form.pandithIds, pandith.id],
+                            });
+                          } else {
+                            setForm({
+                              ...form,
+                              pandithIds: form.pandithIds.filter((id) => id !== pandith.id),
+                            });
+                          }
+                        }}
+                        className="rounded border-gray-300"
+                      />
+                      <div className="h-6 w-6 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold">
+                        {pandith.pandith_name.charAt(0)}
+                      </div>
+                      <div>
+                        <p className="font-medium">{pandith.pandith_name}</p>
+                        <p className="text-xs text-gray-500">{pandith.expertise}</p>
+                      </div>
+                    </label>
+                  ))}
+                </div>
+              )}
+            </div>
+            
+            {form.pandithIds.length > 0 && (
+              <div className="mt-2 space-y-2">
+                <p className="text-sm text-gray-500">Selected Pandiths:</p>
+                <div className="flex flex-wrap gap-2">
+                  {form.pandithIds.map((id) => {
+                    const pandith = pandiths.find((p) => p.id === id);
+                    return pandith ? (
+                      <div
+                        key={id}
+                        className="flex items-center gap-2 bg-gray-100 rounded-full px-3 py-1"
+                      >
+                        <div className="h-6 w-6 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold">
+                          {pandith.pandith_name.charAt(0)}
+                        </div>
+                        <span className="text-sm">{pandith.pandith_name}</span>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setForm({
+                              ...form,
+                              pandithIds: form.pandithIds.filter((pid) => pid !== id),
+                            });
+                          }}
+                          className="text-gray-500 hover:text-red-500 ml-1"
+                        >
+                          ×
+                        </button>
+                      </div>
+                    ) : null;
+                  })}
+                </div>
+              </div>
+            )}
+          </div>
         </div>
 
         {(formData as ArrayField[]).map((field) => (

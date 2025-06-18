@@ -39,28 +39,15 @@ const PujaPariharaList: React.FC = () => {
   const [items, setItems] = useState<Item[]>([]);
   const [pandiths, setPandiths] = useState<Record<string, Pandith>>({});
   const [searchTerm, setSearchTerm] = useState("");
-  const [filterType, setFilterType] = useState<"all" | "Puja" | "Parihara">("all");
+  const [filterType, setFilterType] = useState<"all" | "Puja" | "Parihara">(
+    "all"
+  );
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
       const pujasSnapshot = await getDocs(collection(db, "pujas"));
       const pariharasSnapshot = await getDocs(collection(db, "pariharas"));
-
-      const pujas: Item[] = pujasSnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...(doc.data() as Omit<Item, "id" | "type">),
-        type: "Puja",
-      }));
-
-      const pariharas: Item[] = pariharasSnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...(doc.data() as Omit<Item, "id" | "type">),
-        type: "Parihara",
-      }));
-
-      setItems([...pujas, ...pariharas]);
-
       const pandithSnapshot = await getDocs(collection(db, "pandiths"));
       const pandithMap: Record<string, Pandith> = {};
       pandithSnapshot.docs.forEach((doc) => {
@@ -70,11 +57,35 @@ const PujaPariharaList: React.FC = () => {
         };
       });
       setPandiths(pandithMap);
+
+      const attachPandithDetails = (item: any) => {
+        const pandithIds = item.pandithIds || item.pandiths || [];
+        const fullPandiths = pandithIds
+          .map((id: string) => pandithMap[id])
+          .filter(Boolean);
+        return {
+          ...item,
+          pandiths: fullPandiths,
+        };
+      };
+      console.log(pandiths);
+      const pujas: Item[] = pujasSnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...attachPandithDetails(doc.data()),
+        type: "Puja",
+      }));
+
+      const pariharas: Item[] = pariharasSnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...attachPandithDetails(doc.data()),
+        type: "Parihara",
+      }));
+
+      setItems([...pujas, ...pariharas]);
     };
 
     fetchData();
   }, []);
-
   const handleDelete = async (id: string, type: "Puja" | "Parihara") => {
     if (confirm("Are you sure you want to delete this?")) {
       await deleteDoc(doc(db, type.toLowerCase() + "s", id));
@@ -83,7 +94,9 @@ const PujaPariharaList: React.FC = () => {
   };
 
   const filteredItems = items.filter((item) => {
-    const matchesSearch = item.title.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSearch = item.title
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
     const matchesType = filterType === "all" || item.type === filterType;
     return matchesSearch && matchesType;
   });
@@ -96,7 +109,10 @@ const PujaPariharaList: React.FC = () => {
           <Button onClick={() => navigate("/addpandith")} variant="outline">
             <User className="mr-2 h-4 w-4" /> Add Pandith
           </Button>
-          <Button onClick={() => navigate("/addpuja")}> <Plus className="mr-2 h-4 w-4" /> Add Puja/Parihara </Button>
+          <Button onClick={() => navigate("/addpuja")}>
+            {" "}
+            <Plus className="mr-2 h-4 w-4" /> Add Puja/Parihara{" "}
+          </Button>
         </div>
       </div>
 
@@ -107,7 +123,10 @@ const PujaPariharaList: React.FC = () => {
           onChange={(e) => setSearchTerm(e.target.value)}
           className="w-full"
         />
-        <Select value={filterType} onValueChange={(val) => setFilterType(val as any)}>
+        <Select
+          value={filterType}
+          onValueChange={(val) => setFilterType(val as any)}
+        >
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Filter by type" />
           </SelectTrigger>
@@ -120,12 +139,23 @@ const PujaPariharaList: React.FC = () => {
       </div>
 
       {filteredItems.map((item) => (
-        <div key={item.id} className="bg-white rounded-lg shadow-md p-6 mb-6 border border-gray-100">
+        <div
+          key={item.id}
+          className="bg-white rounded-lg shadow-md p-6 mb-6 border border-gray-100"
+        >
           <div className="flex justify-between">
             <div className="flex-1">
               <div className="flex items-center gap-3 mb-2">
-                <h2 className="text-xl font-semibold text-gray-800">{item.title}</h2>
-                <span className={`px-3 py-1 rounded-full text-sm font-medium ${item.type === "Puja" ? "bg-purple-100 text-purple-700" : "bg-orange-100 text-orange-700"}`}>
+                <h2 className="text-xl font-semibold text-gray-800">
+                  {item.title}
+                </h2>
+                <span
+                  className={`px-3 py-1 rounded-full text-sm font-medium ${
+                    item.type === "Puja"
+                      ? "bg-purple-100 text-purple-700"
+                      : "bg-orange-100 text-orange-700"
+                  }`}
+                >
                   {item.type}
                 </span>
               </div>
@@ -135,7 +165,9 @@ const PujaPariharaList: React.FC = () => {
                 <div className="mb-2">
                   <h4 className="font-semibold text-gray-700">Benefits:</h4>
                   <ul className="list-disc list-inside text-sm text-gray-600">
-                    {item.benefits.map((b, i) => <li key={i}>{b}</li>)}
+                    {item.benefits.map((b, i) => (
+                      <li key={i}>{b}</li>
+                    ))}
                   </ul>
                 </div>
               )}
@@ -144,48 +176,73 @@ const PujaPariharaList: React.FC = () => {
                 <div className="mb-2">
                   <h4 className="font-semibold text-gray-700">Process:</h4>
                   <ul className="list-disc list-inside text-sm text-gray-600">
-                    {item.process.map((p, i) => <li key={i}>{p}</li>)}
+                    {item.process.map((p, i) => (
+                      <li key={i}>{p}</li>
+                    ))}
                   </ul>
                 </div>
               )}
 
               {item.postPujaGuidelines && (
                 <div className="mb-2">
-                  <h4 className="font-semibold text-gray-700">Post Puja Guidelines:</h4>
+                  <h4 className="font-semibold text-gray-700">
+                    Post Puja Guidelines:
+                  </h4>
                   <ul className="list-disc list-inside text-sm text-gray-600">
-                    {item.postPujaGuidelines.map((g, i) => <li key={i}>{g}</li>)}
+                    {item.postPujaGuidelines.map((g, i) => (
+                      <li key={i}>{g}</li>
+                    ))}
                   </ul>
                 </div>
               )}
 
               {item.whyAgraharam && (
                 <div className="mb-2">
-                  <h4 className="font-semibold text-gray-700">Why Agraharam:</h4>
+                  <h4 className="font-semibold text-gray-700">
+                    Why Agraharam:
+                  </h4>
                   <ul className="list-disc list-inside text-sm text-gray-600">
-                    {item.whyAgraharam.map((w, i) => <li key={i}>{w}</li>)}
+                    {item.whyAgraharam.map((w, i) => (
+                      <li key={i}>{w}</li>
+                    ))}
                   </ul>
                 </div>
               )}
 
-              {item.pandiths?.length && (
+              {Array.isArray(item.pandiths) && item.pandiths.length > 0 && (
                 <div className="bg-gray-50 p-4 rounded-lg mt-2">
                   <p className="text-sm font-semibold mb-2 text-gray-700">
-                    <User className="inline-block h-4 w-4 mr-1" /> Assigned Pandiths
+                    <User className="inline-block h-4 w-4 mr-1" /> Assigned
+                    Pandiths
                   </p>
                   <ul className="grid grid-cols-2 gap-4">
-                    {item.pandiths.map((pid) => {
-                      const pandith = Object.values(pandiths).find((p) => p.pandith_name === pid);
-                      return (
-                        <li key={pid} className="flex items-center bg-white rounded p-2 shadow-sm">
-                          <div className="h-8 w-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold mr-2">
-                            {pandith?.pandith_name?.charAt(0) || "?"}
-                          </div>
-                          <div>
-                            <p className="text-sm font-medium">{pandith?.pandith_name || pid}</p>
-                            <p className="text-xs text-gray-500">{pandith?.experience || ""}</p>
-                          </div>
-                        </li>
-                      );
+                    {item.pandiths.map((pandith) => {
+                      if (
+                        typeof pandith === "object" &&
+                        pandith !== null &&
+                        "pandith_name" in pandith
+                      ) {
+                        const pandithObj = pandith as Pandith;
+                        return (
+                          <li
+                            key={pandithObj.id}
+                            className="flex items-center bg-white rounded p-2 shadow-sm"
+                          >
+                            <div className="h-8 w-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold mr-2">
+                              {pandithObj.pandith_name?.charAt(0) || "?"}
+                            </div>
+                            <div>
+                              <p className="text-sm font-medium">
+                                {pandithObj.pandith_name}
+                              </p>
+                              <p className="text-xs text-gray-500">
+                                {pandithObj.experience}
+                              </p>
+                            </div>
+                          </li>
+                        );
+                      }
+                      return null;
                     })}
                   </ul>
                 </div>

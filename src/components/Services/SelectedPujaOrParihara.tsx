@@ -36,21 +36,6 @@ const PujaPariharaList: React.FC = () => {
     const fetchData = async () => {
       const pujasSnapshot = await getDocs(collection(db, "pujas"));
       const pariharasSnapshot = await getDocs(collection(db, "pariharas"));
-
-      const pujas: Item[] = pujasSnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...(doc.data() as Omit<Item, "id" | "type">),
-        type: "Puja",
-      }));
-
-      const pariharas: Item[] = pariharasSnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...(doc.data() as Omit<Item, "id" | "type">),
-        type: "Parihara",
-      }));
-
-      setItems([...pujas, ...pariharas]);
-
       const pandithSnapshot = await getDocs(collection(db, "pandiths"));
       const pandithMap: Record<string, Pandith> = {};
       pandithSnapshot.docs.forEach((doc) => {
@@ -60,11 +45,36 @@ const PujaPariharaList: React.FC = () => {
         };
       });
       setPandiths(pandithMap);
+      const attachPandithDetails = (item: any) => {
+        const pandithIds = item.pandithIds || item.pandiths || [];
+        const fullPandiths = pandithIds
+          .map((id: string) => pandithMap[id])
+          .filter(Boolean);
+        return {
+          ...item,
+          pandiths: fullPandiths,
+        };
+      };
+      console.log(pandiths);
+      const pujas: Item[] = pujasSnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...attachPandithDetails(doc.data()),
+        type: "Puja",
+      }));
+
+      const pariharas: Item[] = pariharasSnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...attachPandithDetails(doc.data()),
+        type: "Parihara",
+      }));
+
+      setItems([...pujas, ...pariharas]);
     };
 
     fetchData();
   }, []);
 
+  console.log();
   const filteredItems = items.filter((item) => {
     const matchesSearch = item.title
       .toLowerCase()
@@ -134,35 +144,45 @@ const PujaPariharaList: React.FC = () => {
                 </ul>
               </div>
             )}
-            {item.pandiths?.length && (
-              <div className="bg-gray-50 p-4 rounded-lg mt-2">
-                <p className="text-sm font-semibold mb-2 text-gray-700">
-                  <User className="inline-block h-4 w-4 mr-1" /> Assigned
-                  Pandiths
+            {Array.isArray(item.pandiths) && item.pandiths.length > 0 && (
+              <div className="bg-[#231F42] p-4 rounded-lg mt-4">
+                <p className="text-sm font-semibold mb-3 text-[#D8B4FE]">
+                  <User className="inline-block h-4 w-4 mr-1" /> Assigned Pandiths
                 </p>
-                <ul className="grid grid-cols-2 gap-4">
-                  {item.pandiths.map((pid) => {
-                    const pandith = Object.values(pandiths).find(
-                      (p) => p.pandith_name === pid
-                    );
-                    return (
-                      <li
-                        key={pid}
-                        className="flex items-center bg-white rounded p-2 shadow-sm"
-                      >
-                        <div className="h-8 w-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold mr-2">
-                          {pandith?.pandith_name?.charAt(0) || "?"}
-                        </div>
-                        <div>
-                          <p className="text-sm font-medium">
-                            {pandith?.pandith_name || pid}
-                          </p>
-                          <p className="text-xs text-gray-500">
-                            {pandith?.experience || ""}
-                          </p>
-                        </div>
-                      </li>
-                    );
+                <ul className="grid grid-cols-1 gap-3">
+                  {item.pandiths.map((pandith) => {
+                    if (typeof pandith === 'object' && pandith !== null && 'pandith_name' in pandith) {
+                      const pandithObj = pandith as Pandith;
+                      return (
+                        <li
+                          key={pandithObj.id}
+                          className="flex items-center bg-[#1A1831] rounded-lg p-3 shadow-sm border border-[#2A2654]"
+                        >
+                          <div className="h-10 w-10 rounded-full bg-[#2A2654] text-[#D8B4FE] flex items-center justify-center font-bold mr-3">
+                            {pandithObj.pandith_name?.charAt(0) || "?"}
+                          </div>
+                          <div className="flex-1">
+                            <p className="text-sm font-medium text-[#D8B4FE]">
+                              {pandithObj.pandith_name}
+                            </p>
+                            <p className="text-xs text-[#8A7BA8]">
+                              {pandithObj.experience}
+                            </p>
+                            {pandithObj.expertise && (
+                              <p className="text-xs text-[#8A7BA8] mt-1">
+                                Expertise: {pandithObj.expertise}
+                              </p>
+                            )}
+                            {pandithObj.spoken && pandithObj.spoken.length > 0 && (
+                              <p className="text-xs text-[#8A7BA8] mt-1">
+                                Languages: {pandithObj.spoken.join(", ")}
+                              </p>
+                            )}
+                          </div>
+                        </li>
+                      );
+                    }
+                    return null;
                   })}
                 </ul>
               </div>
@@ -229,35 +249,45 @@ const PujaPariharaList: React.FC = () => {
                 </ul>
               </div>
             )}
-            {item.pandiths?.length && (
-              <div className="bg-gray-50 p-4 rounded-lg mt-2">
-                <p className="text-sm font-semibold mb-2 text-gray-700">
-                  <User className="inline-block h-4 w-4 mr-1" /> Assigned
-                  Pandiths
+            {Array.isArray(item.pandiths) && item.pandiths.length > 0 && (
+              <div className="bg-[#231F42] p-4 rounded-lg mt-4">
+                <p className="text-sm font-semibold mb-3 text-[#D8B4FE]">
+                  <User className="inline-block h-4 w-4 mr-1" /> Assigned Pandiths
                 </p>
-                <ul className="grid grid-cols-2 gap-4">
-                  {item.pandiths.map((pid) => {
-                    const pandith = Object.values(pandiths).find(
-                      (p) => p.pandith_name === pid
-                    );
-                    return (
-                      <li
-                        key={pid}
-                        className="flex items-center bg-white rounded p-2 shadow-sm"
-                      >
-                        <div className="h-8 w-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold mr-2">
-                          {pandith?.pandith_name?.charAt(0) || "?"}
-                        </div>
-                        <div>
-                          <p className="text-sm font-medium">
-                            {pandith?.pandith_name || pid}
-                          </p>
-                          <p className="text-xs text-gray-500">
-                            {pandith?.experience || ""}
-                          </p>
-                        </div>
-                      </li>
-                    );
+                <ul className="grid grid-cols-1 gap-3">
+                  {item.pandiths.map((pandith) => {
+                    if (typeof pandith === 'object' && pandith !== null && 'pandith_name' in pandith) {
+                      const pandithObj = pandith as Pandith;
+                      return (
+                        <li
+                          key={pandithObj.id}
+                          className="flex items-center bg-[#1A1831] rounded-lg p-3 shadow-sm border border-[#2A2654]"
+                        >
+                          <div className="h-10 w-10 rounded-full bg-[#2A2654] text-[#D8B4FE] flex items-center justify-center font-bold mr-3">
+                            {pandithObj.pandith_name?.charAt(0) || "?"}
+                          </div>
+                          <div className="flex-1">
+                            <p className="text-sm font-medium text-[#D8B4FE]">
+                              {pandithObj.pandith_name}
+                            </p>
+                            <p className="text-xs text-[#8A7BA8]">
+                              {pandithObj.experience}
+                            </p>
+                            {pandithObj.expertise && (
+                              <p className="text-xs text-[#8A7BA8] mt-1">
+                                Expertise: {pandithObj.expertise}
+                              </p>
+                            )}
+                            {pandithObj.spoken && pandithObj.spoken.length > 0 && (
+                              <p className="text-xs text-[#8A7BA8] mt-1">
+                                Languages: {pandithObj.spoken.join(", ")}
+                              </p>
+                            )}
+                          </div>
+                        </li>
+                      );
+                    }
+                    return null;
                   })}
                 </ul>
               </div>
