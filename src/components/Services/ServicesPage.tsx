@@ -30,7 +30,27 @@ const ServicesPage = () => {
 
   const onChangeService = (path: string) => {
     const encodedPath = encodeURIComponent(path);
-    navigate(`/services/${encodedPath}`);
+    
+    // Determine which route to navigate to based on the service type
+    switch (path) {
+      case "Pujas and Pariharas":
+        navigate(`/services/${encodedPath}`);
+        break;
+      case "Birth Chart Generation":
+        navigate(`/services/birth-chart/${encodedPath}`);
+        break;
+      case "Brahmin Catering Services":
+        navigate(`/services/catering/${encodedPath}`);
+        break;
+      case "Horoscope & Predictions":
+        navigate(`/services/horoscope/${encodedPath}`);
+        break;
+      case "Educational Resources":
+        navigate(`/services/education/${encodedPath}`);
+        break;
+      default:
+        navigate(`/services/${encodedPath}`);
+    }
   };
 
   return (
